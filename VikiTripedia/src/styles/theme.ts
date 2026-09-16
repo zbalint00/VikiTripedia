@@ -1,0 +1,17 @@
+export const t = {
+  bg: "#FAF6F1",
+  fg: "#2B1A0F",
+  card: "#FFF9F5",
+  primary: "#C4603A",
+  primaryHover: "#a84e2e",
+  secondary: "#F0E6DC",
+  secondaryFg: "#5C3520",
+  muted: "#EDE3DA",
+  mutedFg: "#8A6550",
+  accent: "#E8A898",
+  border: "#DDD0C4",
+  fontDisplay: "'Fraunces', Georgia, serif",
+  fontBody: "'Outfit', system-ui, sans-serif",
+  radius: "0.75rem",
+  radiusFull: "9999px",
+} as const;
