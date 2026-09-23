@@ -1,4 +1,6 @@
-import type { HomePageProps, Page } from "../types";
+import type { Page } from "../../types";
+import { styles } from "./styles";
+import type { HomePageProps } from "./type";
 
 //TODO - Kicserélni a képet
 const cards = [
@@ -41,57 +43,59 @@ const cards = [
 
 //TODO - Kicserélni a képet + Emotion css-re átírni, átláthatóbb legyen neked. 
 // Szövekeget magyarra átírni, a gombokat is.
-export default function HomePage({ onNavigate }: HomePageProps) {
+const HomePage = ({ onNavigate }: HomePageProps) => {
   return (
-    <div className="min-h-screen pt-14">
+    <div className={styles.page}>
       {/* Hero */}
-      <div className="relative h-[55vh] overflow-hidden">
+      <div className={styles.hero}>
         <img
           src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&h=900&fit=crop&auto=format"
           alt="Travel landscape"
-          className="w-full h-full object-cover"
+          className={styles.heroImg}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2B1A0F]/20 via-transparent to-[#FAF6F1]" />
-        <div className="absolute bottom-10 left-0 right-0 text-center px-4">
-          <p className="text-[#8A6550] text-sm uppercase tracking-widest mb-2">Welcome back,</p>
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroText}>
+          <p className={styles.heroLabel}>Welcome back,</p>
           <h1
-            className="text-5xl md:text-6xl text-[#2B1A0F] leading-tight"
+            className={styles.heroTitle}
             style={{ fontFamily: "'Fraunces', Georgia, serif" }}
           >
             Viki ♡
           </h1>
-          <p className="text-[#5C3520] mt-3 text-lg max-w-md mx-auto">
+          <p className={styles.heroSub}>
             A világ csak ránk vár — Tervezzük meg a következő közös utunkat.
           </p>
         </div>
       </div>
 
       {/* Nav cards */}
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <p className="text-xs uppercase tracking-widest text-[#8A6550] mb-6 text-center">Where would you like to go?</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className={styles.grid}>
+        <p className={styles.gridLabel}>Where would you like to go?</p>
+        <div className={styles.cardGrid}>
           {cards.map(({ page, icon, title, desc, img }) => (
             <button
               key={page}
               onClick={() => onNavigate(page)}
-              className="group text-left rounded-2xl overflow-hidden border border-[#DDD0C4] bg-[#FFF9F5] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C4603A]"
+              className={styles.cardBtn}
             >
-              <div className="relative h-44 overflow-hidden bg-[#EDE3DA]">
+              <div className={styles.cardImgWrap}>
                 <img
                   src={img}
                   alt={title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className={styles.cardImg}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2B1A0F]/30 to-transparent" />
-                <div className="absolute top-4 left-4 w-9 h-9 rounded-full bg-[#FFF9F5]/90 flex items-center justify-center text-lg shadow-sm">
+                <div className={styles.cardImgOverlay} />
+                <div className={styles.cardIconBadge}>
                   {icon}
                 </div>
               </div>
-              <div className="p-5">
-                <h2 className="text-lg font-semibold text-[#2B1A0F] mb-1" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
+              <div className={styles.cardBody}>
+                <h2 className={styles.cardTitle}>
                   {title}
                 </h2>
-                <p className="text-sm text-[#8A6550] leading-relaxed">{desc}</p>
+                <p className={styles.cardDesc}>
+                  {desc}
+                </p>
               </div>
             </button>
           ))}
@@ -100,3 +104,5 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     </div>
   );
 }
+
+export default HomePage;

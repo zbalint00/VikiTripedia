@@ -3,7 +3,7 @@ import type { LoginProps } from "./type";
 import { styles } from "./styles";
 
 
-export default function LoginPage({ onLogin }: LoginProps) {
+const LoginPage = ({ onLogin }: LoginProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -105,3 +105,5 @@ export default function LoginPage({ onLogin }: LoginProps) {
     </div>
   );
 }
+
+export default LoginPage;
