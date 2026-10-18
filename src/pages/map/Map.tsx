@@ -27,7 +27,6 @@ function BeachStars({ rating }: { rating: number }) {
 
 export default function MapPage() {
   const [selected, setSelected] = useState<CountryInfo | null>(null);
-  const [hovered, setHovered] = useState<string | null>(null);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
   const [countryQuery, setCountryQuery] = useState("");
   const [showCountryPicker, setShowCountryPicker] = useState(false);
