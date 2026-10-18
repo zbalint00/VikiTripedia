@@ -40,47 +40,7 @@ const svgMap = css`
   height: 100%;
   min-height: 400px;
 `;
-const pickerBar = css`
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-`;
-const pickerLabel = css`
-  font-size: 0.75rem;
-  color: rgba(43, 26, 15, 0.6);
-  text-align: center;
-  margin: 0 0 8px;
-`;
-const pickerRow = css`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-`;
-const pickerBtnBase = css`
-  padding: 6px 12px;
-  border-radius: ${t.radiusFull};
-  font-size: 0.75rem;
-  font-weight: 500;
-  font-family: ${t.fontBody};
-  border: 1px solid ${t.border};
-  cursor: pointer;
-  transition: all 0.15s;
-`;
-const pickerBtnActive = css`
-  background: ${t.primary};
-  color: white;
-  border-color: ${t.primary};
-`;
-const pickerBtnInactive = css`
-  background: rgba(255, 249, 245, 0.92);
-  color: ${t.fg};
-  &:hover {
-    border-color: ${t.primary};
-    color: ${t.primary};
-  }
-`;
+
 const panel = css`
   border-left: 1px solid ${t.border};
   overflow-y: auto;
@@ -253,6 +213,110 @@ const toast = css`
   z-index: 100;
 `;
 
+const pickerBar = css`
+  position: absolute;
+  z-index: 10;
+  bottom: 20px;
+  left: 20px;
+  width: min(320px, calc(100% - 40px));
+`;
+
+const pickerInput = css`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 14px;
+  background: rgba(255, 249, 245, 0.96);
+  color: ${t.fg};
+  font: inherit;
+  font-size: 0.875rem;
+  outline: none;
+  box-shadow: 0 8px 28px rgba(40, 60, 80, 0.12);
+  backdrop-filter: blur(12px);
+
+  &:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  }
+`;
+
+const pickerBackdrop = css`
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  border: 0;
+  background: transparent;
+`;
+
+const pickerResults = css`
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid ${t.border};
+  border-radius: 14px;
+  background: ${t.card};
+  box-shadow: 0 12px 32px rgba(40, 60, 80, 0.16);
+`;
+
+const pickerResult = css`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: ${t.fg};
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: ${t.bg};
+  }
+
+  span:last-child {
+    margin-left: auto;
+  }
+`;
+
+const pickerEmpty = css`
+  padding: 8px 12px;
+  color: ${t.mutedFg};
+  font-size: 0.875rem;
+`;
+const mapStyle = {
+  width: "100%",
+  height: "auto",
+  display: "block",
+} as const;
+
+const countryStyle = {
+  outline: "none",
+  cursor: "pointer",
+} as const;
+
+const countryHoverStyle = {
+  outline: "none",
+  cursor: "pointer",
+  filter: "brightness(0.94)",
+} as const;
+
+const countryPressedStyle = {
+  outline: "none",
+} as const;
+
+const countryDefaultStyle = {
+  outline: "none",
+} as const;
+
 export const styles = {
   page,
   header,
@@ -262,11 +326,11 @@ export const styles = {
   mapArea,
   svgMap,
   pickerBar,
-  pickerLabel,
-  pickerRow,
-  pickerBtnBase,
-  pickerBtnActive,
-  pickerBtnInactive,
+  pickerInput,
+  pickerBackdrop,
+  pickerResults,
+  pickerResult,
+  pickerEmpty,
   panel,
   panelInner,
   panelTop,
@@ -293,4 +357,9 @@ export const styles = {
   listBtnActive,
   listBtnInactive,
   toast,
+  mapStyle,
+  countryStyle,
+  countryHoverStyle,
+  countryPressedStyle,
+  countryDefaultStyle,
 };
