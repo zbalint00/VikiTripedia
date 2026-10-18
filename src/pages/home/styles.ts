@@ -40,7 +40,7 @@ const heroText = css`
 
 const heroLabel = css`
   color: ${t.mutedFg};
-  font-size: 0.75rem;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin: 0 0 8px;

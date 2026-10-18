@@ -13,7 +13,7 @@ const nav = css`
   justify-content: space-between;
   padding: 0 24px;
   border-bottom: 1px solid ${t.border};
-  background: rgba(255, 249, 245, 0.9);
+  background: rgba(245, 247, 255, 0.9);
   backdrop-filter: blur(12px);
 `;
 

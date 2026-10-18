@@ -4,10 +4,10 @@ import { styles } from "./styles";
 import type { NavBarProps } from "./types";
 
 const links: { page: Page; label: string; icon: string }[] = [
-  { page: "home", label: "Home", icon: "⌂" },
-  { page: "map", label: "Explore", icon: "🗺" },
-  { page: "lists", label: "Lists", icon: "✦" },
-  { page: "memories", label: "Us", icon: "♡" },
+  { page: "home", label: "Főoldal", icon: "⌂" },
+  { page: "map", label: "Felfedezés", icon: "🗺" },
+  { page: "lists", label: "Úti Lista", icon: "✦" },
+  { page: "memories", label: "Emlékek", icon: "♡" },
 ];
 
 const NavBar = ({ current, onNavigate, onLogout }: NavBarProps) => {

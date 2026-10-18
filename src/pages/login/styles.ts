@@ -1,7 +1,6 @@
 import { css, keyframes } from "@emotion/css";
 import { t } from "../../styles/theme";
 
-
 const shake = keyframes`
   0%, 100% { transform: translateX(0); }
   20% { transform: translateX(-8px); }
@@ -33,7 +32,12 @@ const bgImg = css`
 const bgOverlay = css`
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(43,26,15,0.7) 0%, rgba(196,96,58,0.3) 50%, rgba(43,26,15,0.6) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(15, 24, 43, 0.7) 0%,
+    rgba(58, 83, 196, 0.3) 50%,
+    rgba(15, 33, 43, 0.6) 100%
+  );
 `;
 
 const cardWrap = css`
@@ -53,7 +57,7 @@ const card = css`
   backdrop-filter: blur(8px);
   border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
   border: 1px solid ${t.border};
 `;
 
@@ -72,7 +76,7 @@ const icon = css`
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  box-shadow: 0 4px 12px rgba(196,96,58,0.4);
+  box-shadow: 0 4px 12px rgba(58, 129, 196, 0.4);
 `;
 
 const heading = css`
@@ -116,11 +120,15 @@ const input = css`
   font-family: ${t.fontBody};
   font-size: 0.9rem;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  &::placeholder { color: ${t.border}; }
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  &::placeholder {
+    color: ${t.border};
+  }
   &:focus {
     border-color: ${t.primary};
-    box-shadow: 0 0 0 3px rgba(196,96,58,0.15);
+    box-shadow: 0 0 0 3px rgba(58, 134, 196, 0.15);
   }
 `;
 
@@ -129,7 +137,15 @@ const errorMsg = css`
   font-size: 0.875rem;
   text-align: center;
   animation: pulse 2s ease-in-out infinite;
-  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
 `;
 
 const submitBtn = css`
@@ -145,17 +161,25 @@ const submitBtn = css`
   letter-spacing: 0.1em;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(196,96,58,0.3);
-  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 4px 12px rgba(58, 134, 196, 0.3);
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
   margin-top: 8px;
-  &:hover { background: ${t.primaryHover}; box-shadow: 0 6px 16px rgba(196,96,58,0.4); }
-  &:active { transform: scale(0.97); }
+  &:hover {
+    background: ${t.primaryHover};
+    box-shadow: 0 6px 16px rgba(196, 96, 58, 0.4);
+  }
+  &:active {
+    transform: scale(0.97);
+  }
 `;
 
 const footer = css`
   text-align: center;
   color: ${t.border};
-  font-size: 0.75rem;
+  font-size: 12px;
   margin-top: 24px;
 `;
 
@@ -176,5 +200,5 @@ export const styles = {
   input,
   errorMsg,
   submitBtn,
-  footer
+  footer,
 };

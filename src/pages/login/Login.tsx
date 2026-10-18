@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { LoginProps } from "./type";
 import { styles } from "./styles";
+import loginBg from "../../assets/login.jpg";
 
 
 const LoginPage = ({ onLogin }: LoginProps) => {
@@ -24,10 +25,9 @@ const LoginPage = ({ onLogin }: LoginProps) => {
     <div className={styles.page}>
       {/* Background */}
       <div className={styles.bg}>
-        {/* TODO - Kicserélni a képet */}
         <img
-          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&h=1000&fit=crop&auto=format"
-          alt="Mountain landscape"
+          src={loginBg}
+          alt="login background"
           className={styles.bgImg}
         />
         <div className={styles.bgOverlay} />
@@ -55,7 +55,7 @@ const LoginPage = ({ onLogin }: LoginProps) => {
           <form onSubmit={handleSubmit} className={styles.form}>
             <div>
               <label className={styles.label}>
-                Username
+                Felhasználónév
               </label>
               <input
                 type="text"
@@ -67,7 +67,7 @@ const LoginPage = ({ onLogin }: LoginProps) => {
             </div>
             <div>
               <label className={styles.label}>
-                Password
+                Jelszó
               </label>
               <input
                 type="password"

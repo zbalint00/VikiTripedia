@@ -4,10 +4,10 @@ import { useTravel, type ListName } from "../../travelStore";
 import { styles } from "./styles";
 
 const tabs: { key: ListName; label: string; icon: string; emptyMsg: string }[] = [
-  { key: "favorites", label: "Favorites", icon: "❤️", emptyMsg: "No favorites yet — explore the map and add some!" },
-  { key: "beenThere", label: "Been There", icon: "✅", emptyMsg: "Mark the places you've already visited!" },
-  { key: "wishlist", label: "Wishlist", icon: "🌟", emptyMsg: "Start dreaming — add destinations to your wishlist!" },
-  { key: "nextTrip", label: "Next Trip", icon: "✈️", emptyMsg: "Where are we going next? Add it here!" },
+  { key: "favorites", label: "Kedvencek", icon: "❤️", emptyMsg: "Még nincs kedvenc helyed — fedezd fel a térképet és adj hozzá pár helyet!" },
+  { key: "beenThere", label: "Már voltunk itt", icon: "✅", emptyMsg: "Jelöld meg azokat a helyeket, ahol már voltál!" },
+  { key: "wishlist", label: "Kívánságlista", icon: "🌟", emptyMsg: "Kezdj el álmodni — adj hozzá célkitűzéseket a kívánságlistádhoz!" },
+  { key: "nextTrip", label: "Következő kaland", icon: "✈️", emptyMsg: "Hová utazunk legközelebb? Adj hozzá itt!" },
 ];
 
 export default function ListsPage() {
@@ -18,8 +18,8 @@ export default function ListsPage() {
   return (
     <div className={styles.page}>
       <div className={styles.inner}>
-        <h1 className={styles.title}>Our Dream Lists</h1>
-        <p className={styles.subtitle}>All the places we love, want to see, and are planning to visit</p>
+        <h1 className={styles.title}>A Mi kis álom listánk</h1>
+        <p className={styles.subtitle}>Az összes hely, amit szeretnénk látni, és ahova tervezünk elutazni</p>
 
         <div className={styles.tabRow}>
           {tabs.map(({ key, label, icon }) => {
@@ -47,7 +47,7 @@ export default function ListsPage() {
           <div className={styles.empty}>
             <div className={styles.emptyIcon}>{tabs.find(t => t.key === activeTab)?.icon}</div>
             <p className={styles.emptyMsg}>{tabs.find(t => t.key === activeTab)?.emptyMsg}</p>
-            <p className={styles.emptyHint}>Go to the Explore page to add destinations</p>
+            <p className={styles.emptyHint}>Menj a Felfedezés oldalra, hogy hozzáadj helyeket</p>
           </div>
         ) : (
           <div className={styles.list}>
@@ -78,7 +78,7 @@ export default function ListsPage() {
         )}
 
         {items.length > 0 && (
-          <p className={styles.hint}>Hover over a destination to reorder or remove it</p>
+          <p className={styles.hint}>Mozgasd az elemeket a nyilakkal a sorrend megváltoztatásához vagy távolítsd el őket</p>
         )}
       </div>
     </div>

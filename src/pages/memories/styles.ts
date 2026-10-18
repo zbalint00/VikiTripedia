@@ -4,7 +4,7 @@ import { t } from "../../styles/theme";
 const page = css`
   min-height: 100vh;
   padding-top: 56px;
-  background: ${t.bg};
+  background: linear-gradient(135deg, #3c6ee0 0%, ${t.bg} 100%);
 `;
 const heroSection = css`
   position: relative;
@@ -12,7 +12,7 @@ const heroSection = css`
   padding: 64px 24px;
   text-align: center;
   border-bottom: 1px solid ${t.border};
-  background: linear-gradient(135deg, ${t.bg} 0%, ${t.secondary} 100%);
+  background: linear-gradient(135deg, ${t.bg} 40%, #3c6ee0 100%);
 `;
 const heroBg = css`
   position: absolute;
@@ -81,7 +81,7 @@ const gridHeader = css`
 const gridTitle = css`
   font-family: ${t.fontDisplay};
   font-size: 1.25rem;
-  color: ${t.fg};
+  color: #f0f7fa;
   margin: 0;
 `;
 const addBtn = css`

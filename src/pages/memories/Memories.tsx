@@ -3,16 +3,39 @@ import { cx } from "@emotion/css";
 import type Photo from "./type";
 import type { Styles } from "./type";
 import { styles } from "./styles";
-
+import torokKaja from "../../assets/torok_ebed.jpg";
+import arc from "../../assets/arc.jpg";
+import beachMirror from "../../assets/beach_mirror.jpg";
+import weddingKiss from "../../assets/wedding_kiss.jpg";
+import weddingBox from "../../assets/wedding_box.jpg";
+import tiszalok from "../../assets/tiszalok.jpg";
+import cinema from "../../assets/cinema.jpg";
+import rooftop from "../../assets/rooftop.jpg";
+import rooftopViki from "../../assets/rooftop_viki.jpg";
+import tejbetok from "../../assets/tejbetok.jpg";
+import naplemente from "../../assets/naplemente.jpg";
+import torony from "../../assets/torony.jpg";
+import fiordinapoli from "../../assets/fiordinapoli.jpg";
+import szallas from "../../assets/szallas.jpg";
+import jetski from "../../assets/jetski.jpg";
 
 
 const initialPhotos: Photo[] = [
-  { id: "1", url: "https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=600&h=800&fit=crop&auto=format", caption: "Chasing sunsets together" },
-  { id: "2", url: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=600&h=400&fit=crop&auto=format", caption: "Every adventure starts with you" },
-  { id: "3", url: "https://images.unsplash.com/photo-1469521669194-babb45599def?w=600&h=600&fit=crop&auto=format", caption: "Lost in beautiful places" },
-  { id: "4", url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=400&fit=crop&auto=format", caption: "Our favorite kind of view" },
-  { id: "5", url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&h=700&fit=crop&auto=format", caption: "You make every place magical" },
-  { id: "6", url: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&h=400&fit=crop&auto=format", caption: "Mountains can wait — this moment can't" },
+  { id: "1", url: torokKaja, caption: "Egy 'kis' laza török vacsora" },
+  { id: "2", url: beachMirror, caption: "Beach time Antalyba!" },
+  { id: "3", url: weddingKiss, caption: "Csókcsók puszipuszi" },
+  { id: "4", url: weddingBox, caption: "Boxolók" },
+  { id: "5", url: arc, caption: "Nincs hozzá fűzni valóm" },
+  { id: "6", url: tiszalok, caption: "Random Tiszalöki séta" },
+  { id: "7", url: cinema, caption: "Mozis est, pókemberrel" },
+  { id: "8", url: rooftop, caption: "Rooftop koktélozgatás Törökben" },
+  { id: "9", url: rooftopViki, caption: "Gyémántos hercegnőm" },
+  { id: "10", url: tejbetok, caption: "TejbeTök" },
+  { id: "11", url: naplemente, caption: "A nagy esténk a hegyen!" },
+  { id: "12", url: torony, caption: "Hadrian kapuja" },
+  { id: "13", url: fiordinapoli, caption: "Fior di Napoli. NyamNyam" },
+  { id: "14", url: szallas, caption: "Antalya szállásunk kilátása" },
+  { id: "15", url: jetski, caption: "Give me the beat, I ride it like a jetski" },
 ];
 
 const quotes = [
@@ -74,29 +97,29 @@ export default function MemoriesPage() {
       <div className={styles.heroSection}>
         <div className={styles.heroBg} />
         <div className={styles.heroInner}>
-          <p className={styles.heroLabel}>A little corner just for us</p>
-          <h1 className={styles.heroTitle}>Maya & [Your Name] ♡</h1>
+          <p className={styles.heroLabel}>Ez a mi kis sarkunk</p>
+          <h1 className={styles.heroTitle}>Viki & Bálint ♡</h1>
           <p className={styles.heroQuote}>"{heroQuote}"</p>
         </div>
       </div>
 
       <div className={styles.quoteStrip}>
         {quotes.map((q, i) => (
-          <span key={i} className={styles.quoteItem}>♡ {q}</span>
+          <span key={i} className={styles.quoteItem}>♡ {q} ♡</span>
         ))}
       </div>
 
       <div className={styles.gridSection}>
         <div className={styles.gridHeader}>
-          <h2 className={styles.gridTitle}>Our Memories</h2>
+          <h2 className={styles.gridTitle}>Az emlékeink</h2>
           <button className={styles.addBtn} onClick={() => setShowAdd(!showAdd)}>
-            <span>+</span> Add Photo
+            <span>+</span> Tölts fel egy új emléket
           </button>
         </div>
 
         {showAdd && (
           <div className={styles.addForm}>
-            <h3 className={styles.addFormTitle}>Add a Memory</h3>
+            <h3 className={styles.addFormTitle}>Adj hozzá egy új emléket</h3>
             <div className={styles.addFormInputs}>
               <input
                 type="url"
@@ -129,7 +152,8 @@ export default function MemoriesPage() {
 
       <div className={styles.footer}>
         <p className={styles.footerHeart}>♡</p>
-        <p className={styles.footerQuote}>"Home isn't a place. It's wherever you are."</p>
+        <p className={styles.footerQuote}>"Ott az otthonom, ahol Te vársz."</p>
+        <p className={styles.footerQuote}>Szeretlek!</p>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { t } from "../../styles/theme";
 const page = css`
   min-height: 100vh;
   padding-top: 56px;
-  background: ${t.bg};
+  background: linear-gradient(135deg, ${t.bg} 40%, #3c6ee0 100%);
 `;
 const inner = css`
   max-width: 720px;
@@ -108,8 +108,8 @@ const item = css`
     border-color 0.2s,
     box-shadow 0.2s;
   &:hover {
-    border-color: rgba(196, 96, 58, 0.3);
-    box-shadow: 0 2px 8px rgba(43, 26, 15, 0.06);
+    border-color: rgba(60, 58, 196, 0.3);
+    box-shadow: 0 2px 8px rgba(16, 15, 43, 0.06);
   }
 `;
 const rank = css`

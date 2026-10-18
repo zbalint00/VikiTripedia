@@ -29,10 +29,10 @@ const COUNTRIES_SVG: { id: string; name: string; d: string }[] = [
 ];
 
 const listConfig: { key: ListName; label: string; icon: string }[] = [
-  { key: "favorites", label: "Favorite", icon: "❤️" },
-  { key: "beenThere", label: "Been There", icon: "✅" },
-  { key: "wishlist", label: "Wishlist", icon: "🌟" },
-  { key: "nextTrip", label: "Next Trip", icon: "✈️" },
+  { key: "favorites", label: "Kedvencek", icon: "❤️" },
+  { key: "beenThere", label: "Már voltunk itt", icon: "✅" },
+  { key: "wishlist", label: "Kívánságlista", icon: "🌟" },
+  { key: "nextTrip", label: "Következő kaland", icon: "✈️" },
 ];
 
 function BeachStars({ rating }: { rating: number }) {
@@ -70,8 +70,8 @@ export default function MapPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.headerTitle}>Explore the World</h1>
-        <p className={styles.headerSub}>Click a country to discover beaches, weather & trip costs from Budapest</p>
+        <h1 className={styles.headerTitle}>Fedezzük fel a világot</h1>
+        <p className={styles.headerSub}>Kattints egy országra, hogy felfedezd a strandokat, az időjárást és az utazási költségeket Budapesten</p>
       </div>
 
       <div className={styles.body}>
@@ -110,13 +110,13 @@ export default function MapPage() {
             })}
             {hovered && (
               <text x="490" y="500" textAnchor="middle" fill={t.fg} fontSize="12" fontFamily="Outfit, sans-serif">
-                {countryData[hovered]?.name} — click to explore
+                {countryData[hovered]?.name} — kattints a felfedezéshez
               </text>
             )}
           </svg>
 
           <div className={styles.pickerBar}>
-            <p className={styles.pickerLabel}>Or pick a destination directly:</p>
+            <p className={styles.pickerLabel}>Válassz ki egy célpontot:</p>
             <div className={styles.pickerRow}>
               {Object.values(countryData).map((c) => (
                 <button
