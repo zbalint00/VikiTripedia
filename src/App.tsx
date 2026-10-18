@@ -14,11 +14,24 @@ const shell = css`
   min-height: 100vh;
   background: #faf6f1;
 `;
+const validPages: Page[] = ["home", "map", "lists", "memories"];
 
 function App() {
   const [authed, setAuthed] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
-  const [page, setPage] = useState<Page>("home");
+  const [page, setPage] = useState<Page>(() => {
+    const savedPage = localStorage.getItem("vikinerary-page");
+
+    if (savedPage && validPages.includes(savedPage as Page)) {
+      return savedPage as Page;
+    }
+
+    return "home";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("vikinerary-page", page);
+  }, [page]);
 
   useEffect(() => {
     let mounted = true;

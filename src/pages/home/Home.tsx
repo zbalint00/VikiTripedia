@@ -5,6 +5,7 @@ import HomeBg from "../../assets/home_bg.jpg";
 import mapCardImg from "../../assets/map_home_page.jpg";
 import DreamListCardImg from "../../assets/dream_list.jpg";
 import MemoriesCardImg from "../../assets/memories_card.jpg";
+import { cx } from "@emotion/css";
 
 //TODO - Kicserélni a képet
 const cards = [
@@ -28,10 +29,10 @@ const cards = [
     title: "Közös emlékeink",
     desc: "Fényképek, történetek és azok a kis pillanatok, amelyek mi vagyunk",
     img: MemoriesCardImg,
-  }
+  },
 ];
 
-//TODO - Kicserélni a képet + Emotion css-re átírni, átláthatóbb legyen neked. 
+//TODO - Kicserélni a képet + Emotion css-re átírni, átláthatóbb legyen neked.
 // Szövekeget magyarra átírni, a gombokat is.
 const HomePage = ({ onNavigate }: HomePageProps) => {
   return (
@@ -72,20 +73,18 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
                 <img
                   src={img}
                   alt={title}
-                  className={styles.cardImg}
-                />
+                  className={cx(
+                    styles.cardImg,
+                    page === "lists" && styles.dreamListCardImg,
+                    page === "memories" && styles.memoriesCardImg,
+                  )}
+                />{" "}
                 <div className={styles.cardImgOverlay} />
-                <div className={styles.cardIconBadge}>
-                  {icon}
-                </div>
+                <div className={styles.cardIconBadge}>{icon}</div>
               </div>
               <div className={styles.cardBody}>
-                <h2 className={styles.cardTitle}>
-                  {title}
-                </h2>
-                <p className={styles.cardDesc}>
-                  {desc}
-                </p>
+                <h2 className={styles.cardTitle}>{title}</h2>
+                <p className={styles.cardDesc}>{desc}</p>
               </div>
             </button>
           ))}
@@ -93,6 +92,6 @@ const HomePage = ({ onNavigate }: HomePageProps) => {
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;

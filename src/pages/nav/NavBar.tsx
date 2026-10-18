@@ -13,10 +13,7 @@ const links: { page: Page; label: string; icon: string }[] = [
 const NavBar = ({ current, onNavigate, onLogout }: NavBarProps) => {
   return (
     <nav className={styles.nav}>
-      <button
-        onClick={() => onNavigate("home")}
-        className={styles.logo}
-      >
+      <button onClick={() => onNavigate("home")} className={styles.logo}>
         VikiTripedia ♡
       </button>
 
@@ -25,20 +22,21 @@ const NavBar = ({ current, onNavigate, onLogout }: NavBarProps) => {
           <button
             key={page}
             onClick={() => onNavigate(page)}
-            className={cx(styles.linkBase, current === page ? styles.linkActive : styles.linkInactive)}
+            className={cx(
+              styles.linkBase,
+              current === page ? styles.linkActive : styles.linkInactive,
+            )}
           >
-            <span>{icon}</span>{label}
+            <span>{icon}</span>
+            {label}
           </button>
         ))}
-        <button
-          onClick={onLogout}
-          className={styles.logoutBtn}
-        >
+        <button onClick={onLogout} className={styles.logoutBtn}>
           {"Kilépés :("}
         </button>
       </div>
     </nav>
   );
-}
+};
 
 export default NavBar;
