@@ -36,6 +36,8 @@ async function main() {
       region: country.subregion || country.region || "Other",
       continent: country.region || "Other",
       capital: country.capital?.[0] ?? "",
+      latitude: country.latlng?.[0] ?? null,
+      longitude: country.latlng?.[1] ?? null,
       currencies: Object.entries(country.currencies ?? {}).map(
         ([code, currency]) => ({
           code,
@@ -63,6 +65,8 @@ export interface CountryBaseInfo {
   region: string;
   continent: string;
   capital: string;
+  latitude: number | null;
+  longitude: number | null;
   currencies: {
     code: string;
     name: string;

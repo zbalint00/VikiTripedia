@@ -12,6 +12,8 @@ export interface CountryBaseInfo {
   region: string;
   continent: string;
   capital: string;
+  latitude: number | null;
+  longitude: number | null;
   currencies: {
     code: string;
     name: string;
@@ -33,6 +35,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Kabul",
+    "latitude": 33,
+    "longitude": 65,
     "currencies": [
       {
         "code": "AFN",
@@ -58,6 +62,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Mariehamn",
+    "latitude": 60.116667,
+    "longitude": 19.9,
     "currencies": [
       {
         "code": "EUR",
@@ -81,6 +87,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Tirana",
+    "latitude": 41,
+    "longitude": 20,
     "currencies": [
       {
         "code": "ALL",
@@ -104,6 +112,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Africa",
     "continent": "Africa",
     "capital": "Algiers",
+    "latitude": 28,
+    "longitude": 3,
     "currencies": [
       {
         "code": "DZD",
@@ -127,6 +137,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Pago Pago",
+    "latitude": -14.33333333,
+    "longitude": -170,
     "currencies": [
       {
         "code": "USD",
@@ -151,6 +163,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Andorra la Vella",
+    "latitude": 42.5,
+    "longitude": 1.5,
     "currencies": [
       {
         "code": "EUR",
@@ -174,6 +188,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "Luanda",
+    "latitude": -12.5,
+    "longitude": 18.5,
     "currencies": [
       {
         "code": "AOA",
@@ -197,6 +213,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "The Valley",
+    "latitude": 18.25,
+    "longitude": -63.16666666,
     "currencies": [
       {
         "code": "XCD",
@@ -220,6 +238,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Antarctic",
     "continent": "Antarctic",
     "capital": "",
+    "latitude": -90,
+    "longitude": 0,
     "currencies": [],
     "languages": [],
     "continents": [],
@@ -235,6 +255,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Saint John's",
+    "latitude": 17.05,
+    "longitude": -61.8,
     "currencies": [
       {
         "code": "XCD",
@@ -258,6 +280,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Buenos Aires",
+    "latitude": -34,
+    "longitude": -64,
     "currencies": [
       {
         "code": "ARS",
@@ -282,6 +306,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Yerevan",
+    "latitude": 40,
+    "longitude": 45,
     "currencies": [
       {
         "code": "AMD",
@@ -305,6 +331,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Oranjestad",
+    "latitude": 12.5,
+    "longitude": -69.96666666,
     "currencies": [
       {
         "code": "AWG",
@@ -329,6 +357,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Australia and New Zealand",
     "continent": "Oceania",
     "capital": "Canberra",
+    "latitude": -27,
+    "longitude": 133,
     "currencies": [
       {
         "code": "AUD",
@@ -352,6 +382,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Europe",
     "continent": "Europe",
     "capital": "Vienna",
+    "latitude": 47.33333333,
+    "longitude": 13.33333333,
     "currencies": [
       {
         "code": "EUR",
@@ -375,6 +407,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Baku",
+    "latitude": 40.5,
+    "longitude": 47.5,
     "currencies": [
       {
         "code": "AZN",
@@ -399,6 +433,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Nassau",
+    "latitude": 24.25,
+    "longitude": -76,
     "currencies": [
       {
         "code": "BSD",
@@ -427,6 +463,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Manama",
+    "latitude": 26,
+    "longitude": 50.55,
     "currencies": [
       {
         "code": "BHD",
@@ -450,6 +488,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Dhaka",
+    "latitude": 24,
+    "longitude": 90,
     "currencies": [
       {
         "code": "BDT",
@@ -473,6 +513,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Bridgetown",
+    "latitude": 13.16666666,
+    "longitude": -59.53333333,
     "currencies": [
       {
         "code": "BBD",
@@ -496,6 +538,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Europe",
     "continent": "Europe",
     "capital": "Minsk",
+    "latitude": 53,
+    "longitude": 28,
     "currencies": [
       {
         "code": "BYN",
@@ -520,6 +564,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Brussels",
+    "latitude": 50.83333333,
+    "longitude": 4,
     "currencies": [
       {
         "code": "EUR",
@@ -545,6 +591,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central America",
     "continent": "Americas",
     "capital": "Belmopan",
+    "latitude": 17.25,
+    "longitude": -88.75,
     "currencies": [
       {
         "code": "BZD",
@@ -570,6 +618,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Porto-Novo",
+    "latitude": 9.5,
+    "longitude": 2.25,
     "currencies": [
       {
         "code": "XOF",
@@ -593,6 +643,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "North America",
     "continent": "Americas",
     "capital": "Hamilton",
+    "latitude": 32.33333333,
+    "longitude": -64.75,
     "currencies": [
       {
         "code": "BMD",
@@ -616,6 +668,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Thimphu",
+    "latitude": 27.5,
+    "longitude": 90.5,
     "currencies": [
       {
         "code": "BTN",
@@ -644,6 +698,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Sucre",
+    "latitude": -17,
+    "longitude": -65,
     "currencies": [
       {
         "code": "BOB",
@@ -670,6 +726,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Sarajevo",
+    "latitude": 44,
+    "longitude": 18,
     "currencies": [
       {
         "code": "BAM",
@@ -695,6 +753,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Africa",
     "continent": "Africa",
     "capital": "Gaborone",
+    "latitude": -22,
+    "longitude": 24,
     "currencies": [
       {
         "code": "BWP",
@@ -719,6 +779,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Antarctic",
     "continent": "Antarctic",
     "capital": "",
+    "latitude": -54.43333333,
+    "longitude": 3.4,
     "currencies": [],
     "languages": [
       "Norwegian"
@@ -736,6 +798,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Brasília",
+    "latitude": -10,
+    "longitude": -55,
     "currencies": [
       {
         "code": "BRL",
@@ -759,6 +823,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Diego Garcia",
+    "latitude": -6,
+    "longitude": 71.5,
     "currencies": [
       {
         "code": "USD",
@@ -782,6 +848,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Road Town",
+    "latitude": 18.431383,
+    "longitude": -64.62305,
     "currencies": [
       {
         "code": "USD",
@@ -805,6 +873,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Bandar Seri Begawan",
+    "latitude": 4.5,
+    "longitude": 114.66666666,
     "currencies": [
       {
         "code": "BND",
@@ -833,6 +903,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Sofia",
+    "latitude": 43,
+    "longitude": 25,
     "currencies": [
       {
         "code": "EUR",
@@ -856,6 +928,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Ouagadougou",
+    "latitude": 13,
+    "longitude": -2,
     "currencies": [
       {
         "code": "XOF",
@@ -879,6 +953,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Gitega",
+    "latitude": -3.5,
+    "longitude": 30,
     "currencies": [
       {
         "code": "BIF",
@@ -903,6 +979,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Phnom Penh",
+    "latitude": 13,
+    "longitude": 105,
     "currencies": [
       {
         "code": "KHR",
@@ -931,6 +1009,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "Yaoundé",
+    "latitude": 6,
+    "longitude": 12,
     "currencies": [
       {
         "code": "XAF",
@@ -955,6 +1035,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "North America",
     "continent": "Americas",
     "capital": "Ottawa",
+    "latitude": 60,
+    "longitude": -95,
     "currencies": [
       {
         "code": "CAD",
@@ -979,6 +1061,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Praia",
+    "latitude": 16,
+    "longitude": -24,
     "currencies": [
       {
         "code": "CVE",
@@ -1002,6 +1086,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Kralendijk",
+    "latitude": 12.18,
+    "longitude": -68.25,
     "currencies": [
       {
         "code": "USD",
@@ -1027,6 +1113,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "George Town",
+    "latitude": 19.5,
+    "longitude": -80.5,
     "currencies": [
       {
         "code": "KYD",
@@ -1050,6 +1138,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "Bangui",
+    "latitude": 7,
+    "longitude": 21,
     "currencies": [
       {
         "code": "XAF",
@@ -1074,6 +1164,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "N'Djamena",
+    "latitude": 15,
+    "longitude": 19,
     "currencies": [
       {
         "code": "XAF",
@@ -1098,6 +1190,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Santiago",
+    "latitude": -30,
+    "longitude": -71,
     "currencies": [
       {
         "code": "CLP",
@@ -1121,6 +1215,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "Beijing",
+    "latitude": 35,
+    "longitude": 105,
     "currencies": [
       {
         "code": "CNY",
@@ -1144,6 +1240,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Australia and New Zealand",
     "continent": "Oceania",
     "capital": "Flying Fish Cove",
+    "latitude": -10.5,
+    "longitude": 105.66666666,
     "currencies": [
       {
         "code": "AUD",
@@ -1167,6 +1265,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Australia and New Zealand",
     "continent": "Oceania",
     "capital": "West Island",
+    "latitude": -12.5,
+    "longitude": 96.83333333,
     "currencies": [
       {
         "code": "AUD",
@@ -1190,6 +1290,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Bogotá",
+    "latitude": 4,
+    "longitude": -72,
     "currencies": [
       {
         "code": "COP",
@@ -1213,6 +1315,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Moroni",
+    "latitude": -12.16666666,
+    "longitude": 44.25,
     "currencies": [
       {
         "code": "KMF",
@@ -1238,6 +1342,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "Brazzaville",
+    "latitude": -1,
+    "longitude": 15,
     "currencies": [
       {
         "code": "XAF",
@@ -1263,6 +1369,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Avarua",
+    "latitude": -21.23333333,
+    "longitude": -159.76666666,
     "currencies": [
       {
         "code": "CKD",
@@ -1292,6 +1400,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central America",
     "continent": "Americas",
     "capital": "San José",
+    "latitude": 10,
+    "longitude": -84,
     "currencies": [
       {
         "code": "CRC",
@@ -1315,6 +1425,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Zagreb",
+    "latitude": 45.16666666,
+    "longitude": 15.5,
     "currencies": [
       {
         "code": "EUR",
@@ -1338,12 +1450,9 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Havana",
+    "latitude": 21.5,
+    "longitude": -80,
     "currencies": [
-      {
-        "code": "CUC",
-        "name": "Cuban convertible peso",
-        "symbol": "$"
-      },
       {
         "code": "CUP",
         "name": "Cuban peso",
@@ -1366,11 +1475,13 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Willemstad",
+    "latitude": 12.116667,
+    "longitude": -68.933333,
     "currencies": [
       {
-        "code": "ANG",
-        "name": "Netherlands Antillean guilder",
-        "symbol": "ƒ"
+        "code": "XCG",
+        "name": "Caribbean guilder",
+        "symbol": "Cg"
       }
     ],
     "languages": [
@@ -1391,6 +1502,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Nicosia",
+    "latitude": 35,
+    "longitude": 33,
     "currencies": [
       {
         "code": "EUR",
@@ -1415,6 +1528,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Europe",
     "continent": "Europe",
     "capital": "Prague",
+    "latitude": 49.75,
+    "longitude": 15.5,
     "currencies": [
       {
         "code": "CZK",
@@ -1439,6 +1554,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Copenhagen",
+    "latitude": 56,
+    "longitude": 10,
     "currencies": [
       {
         "code": "DKK",
@@ -1462,6 +1579,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Djibouti",
+    "latitude": 11.5,
+    "longitude": 43,
     "currencies": [
       {
         "code": "DJF",
@@ -1486,6 +1605,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Roseau",
+    "latitude": 15.41666666,
+    "longitude": -61.33333333,
     "currencies": [
       {
         "code": "XCD",
@@ -1509,6 +1630,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Santo Domingo",
+    "latitude": 19,
+    "longitude": -70.66666666,
     "currencies": [
       {
         "code": "DOP",
@@ -1532,6 +1655,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "Kinshasa",
+    "latitude": 0,
+    "longitude": 25,
     "currencies": [
       {
         "code": "CDF",
@@ -1559,6 +1684,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Quito",
+    "latitude": -2,
+    "longitude": -77.5,
     "currencies": [
       {
         "code": "USD",
@@ -1582,6 +1709,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Africa",
     "continent": "Africa",
     "capital": "Cairo",
+    "latitude": 27,
+    "longitude": 30,
     "currencies": [
       {
         "code": "EGP",
@@ -1605,6 +1734,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central America",
     "continent": "Americas",
     "capital": "San Salvador",
+    "latitude": 13.83333333,
+    "longitude": -88.91666666,
     "currencies": [
       {
         "code": "USD",
@@ -1627,7 +1758,9 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "flagUrl": "",
     "region": "Middle Africa",
     "continent": "Africa",
-    "capital": "Malabo",
+    "capital": "Ciudad de la Paz",
+    "latitude": 2,
+    "longitude": 10,
     "currencies": [
       {
         "code": "XAF",
@@ -1653,6 +1786,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Asmara",
+    "latitude": 15,
+    "longitude": 39,
     "currencies": [
       {
         "code": "ERN",
@@ -1678,6 +1813,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Tallinn",
+    "latitude": 59,
+    "longitude": 26,
     "currencies": [
       {
         "code": "EUR",
@@ -1701,6 +1838,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Africa",
     "continent": "Africa",
     "capital": "Lobamba",
+    "latitude": -26.5,
+    "longitude": 31.5,
     "currencies": [
       {
         "code": "SZL",
@@ -1730,6 +1869,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Addis Ababa",
+    "latitude": 8,
+    "longitude": 38,
     "currencies": [
       {
         "code": "ETB",
@@ -1753,6 +1894,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Stanley",
+    "latitude": -51.75,
+    "longitude": -59,
     "currencies": [
       {
         "code": "FKP",
@@ -1776,6 +1919,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Tórshavn",
+    "latitude": 62,
+    "longitude": -7,
     "currencies": [
       {
         "code": "DKK",
@@ -1805,6 +1950,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Melanesia",
     "continent": "Oceania",
     "capital": "Suva",
+    "latitude": -18,
+    "longitude": 175,
     "currencies": [
       {
         "code": "FJD",
@@ -1830,6 +1977,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Helsinki",
+    "latitude": 64,
+    "longitude": 26,
     "currencies": [
       {
         "code": "EUR",
@@ -1854,6 +2003,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Paris",
+    "latitude": 46,
+    "longitude": 2,
     "currencies": [
       {
         "code": "EUR",
@@ -1877,6 +2028,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Cayenne",
+    "latitude": 4,
+    "longitude": -53,
     "currencies": [
       {
         "code": "EUR",
@@ -1900,6 +2053,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Papeetē",
+    "latitude": -15,
+    "longitude": -140,
     "currencies": [
       {
         "code": "XPF",
@@ -1923,6 +2078,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Antarctic",
     "continent": "Antarctic",
     "capital": "Port-aux-Français",
+    "latitude": -49.25,
+    "longitude": 69.167,
     "currencies": [
       {
         "code": "EUR",
@@ -1946,6 +2103,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "Libreville",
+    "latitude": -1,
+    "longitude": 11.75,
     "currencies": [
       {
         "code": "XAF",
@@ -1969,6 +2128,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Banjul",
+    "latitude": 13.46666666,
+    "longitude": -16.56666666,
     "currencies": [
       {
         "code": "GMD",
@@ -1992,6 +2153,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Tbilisi",
+    "latitude": 42,
+    "longitude": 43.5,
     "currencies": [
       {
         "code": "GEL",
@@ -2015,6 +2178,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Berlin",
+    "latitude": 51,
+    "longitude": 9,
     "currencies": [
       {
         "code": "EUR",
@@ -2038,6 +2203,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Accra",
+    "latitude": 8,
+    "longitude": -2,
     "currencies": [
       {
         "code": "GHS",
@@ -2061,6 +2228,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Gibraltar",
+    "latitude": 36.13333333,
+    "longitude": -5.35,
     "currencies": [
       {
         "code": "GIP",
@@ -2084,6 +2253,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Athens",
+    "latitude": 39,
+    "longitude": 22,
     "currencies": [
       {
         "code": "EUR",
@@ -2107,6 +2278,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "North America",
     "continent": "Americas",
     "capital": "Nuuk",
+    "latitude": 72,
+    "longitude": -40,
     "currencies": [
       {
         "code": "DKK",
@@ -2130,6 +2303,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "St. George's",
+    "latitude": 12.11666666,
+    "longitude": -61.66666666,
     "currencies": [
       {
         "code": "XCD",
@@ -2153,6 +2328,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Basse-Terre",
+    "latitude": 16.25,
+    "longitude": -61.583333,
     "currencies": [
       {
         "code": "EUR",
@@ -2176,6 +2353,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Micronesia",
     "continent": "Oceania",
     "capital": "Hagåtña",
+    "latitude": 13.46666666,
+    "longitude": 144.78333333,
     "currencies": [
       {
         "code": "USD",
@@ -2201,6 +2380,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central America",
     "continent": "Americas",
     "capital": "Guatemala City",
+    "latitude": 15.5,
+    "longitude": -90.25,
     "currencies": [
       {
         "code": "GTQ",
@@ -2224,6 +2405,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "St. Peter Port",
+    "latitude": 49.46666666,
+    "longitude": -2.58333333,
     "currencies": [
       {
         "code": "GBP",
@@ -2254,6 +2437,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Conakry",
+    "latitude": 11,
+    "longitude": -10,
     "currencies": [
       {
         "code": "GNF",
@@ -2277,6 +2462,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Bissau",
+    "latitude": 12,
+    "longitude": -15,
     "currencies": [
       {
         "code": "XOF",
@@ -2301,6 +2488,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Georgetown",
+    "latitude": 5,
+    "longitude": -59,
     "currencies": [
       {
         "code": "GYD",
@@ -2324,6 +2513,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Port-au-Prince",
+    "latitude": 19,
+    "longitude": -72.41666666,
     "currencies": [
       {
         "code": "HTG",
@@ -2348,6 +2539,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Antarctic",
     "continent": "Antarctic",
     "capital": "",
+    "latitude": -53.1,
+    "longitude": 72.51666666,
     "currencies": [],
     "languages": [
       "English"
@@ -2365,6 +2558,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central America",
     "continent": "Americas",
     "capital": "Tegucigalpa",
+    "latitude": 15,
+    "longitude": -86.5,
     "currencies": [
       {
         "code": "HNL",
@@ -2388,6 +2583,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "City of Victoria",
+    "latitude": 22.267,
+    "longitude": 114.188,
     "currencies": [
       {
         "code": "HKD",
@@ -2412,6 +2609,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Europe",
     "continent": "Europe",
     "capital": "Budapest",
+    "latitude": 47,
+    "longitude": 20,
     "currencies": [
       {
         "code": "HUF",
@@ -2435,6 +2634,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Reykjavik",
+    "latitude": 65,
+    "longitude": -18,
     "currencies": [
       {
         "code": "ISK",
@@ -2458,6 +2659,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "New Delhi",
+    "latitude": 20,
+    "longitude": 77,
     "currencies": [
       {
         "code": "INR",
@@ -2483,6 +2686,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Jakarta",
+    "latitude": -5,
+    "longitude": 120,
     "currencies": [
       {
         "code": "IDR",
@@ -2506,6 +2711,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Tehran",
+    "latitude": 32,
+    "longitude": 53,
     "currencies": [
       {
         "code": "IRR",
@@ -2529,6 +2736,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Baghdad",
+    "latitude": 33,
+    "longitude": 44,
     "currencies": [
       {
         "code": "IQD",
@@ -2554,6 +2763,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Dublin",
+    "latitude": 53,
+    "longitude": -8,
     "currencies": [
       {
         "code": "EUR",
@@ -2578,6 +2789,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Douglas",
+    "latitude": 54.25,
+    "longitude": -4.5,
     "currencies": [
       {
         "code": "GBP",
@@ -2607,6 +2820,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Jerusalem",
+    "latitude": 31.47,
+    "longitude": 35.13,
     "currencies": [
       {
         "code": "ILS",
@@ -2631,6 +2846,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Rome",
+    "latitude": 42.83333333,
+    "longitude": 12.83333333,
     "currencies": [
       {
         "code": "EUR",
@@ -2654,6 +2871,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Yamoussoukro",
+    "latitude": 8,
+    "longitude": -5,
     "currencies": [
       {
         "code": "XOF",
@@ -2677,6 +2896,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Kingston",
+    "latitude": 18.25,
+    "longitude": -77.5,
     "currencies": [
       {
         "code": "JMD",
@@ -2701,6 +2922,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "Tokyo",
+    "latitude": 36,
+    "longitude": 138,
     "currencies": [
       {
         "code": "JPY",
@@ -2724,6 +2947,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Saint Helier",
+    "latitude": 49.25,
+    "longitude": -2.16666666,
     "currencies": [
       {
         "code": "GBP",
@@ -2754,6 +2979,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Amman",
+    "latitude": 31,
+    "longitude": 36,
     "currencies": [
       {
         "code": "JOD",
@@ -2777,6 +3004,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Asia",
     "continent": "Asia",
     "capital": "Astana",
+    "latitude": 48,
+    "longitude": 68,
     "currencies": [
       {
         "code": "KZT",
@@ -2801,6 +3030,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Nairobi",
+    "latitude": 1,
+    "longitude": 38,
     "currencies": [
       {
         "code": "KES",
@@ -2825,6 +3056,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Micronesia",
     "continent": "Oceania",
     "capital": "South Tarawa",
+    "latitude": 1.41666666,
+    "longitude": 173,
     "currencies": [
       {
         "code": "AUD",
@@ -2854,6 +3087,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Pristina",
+    "latitude": 42.666667,
+    "longitude": 21.166667,
     "currencies": [
       {
         "code": "EUR",
@@ -2878,6 +3113,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Kuwait City",
+    "latitude": 29.5,
+    "longitude": 45.75,
     "currencies": [
       {
         "code": "KWD",
@@ -2901,6 +3138,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Asia",
     "continent": "Asia",
     "capital": "Bishkek",
+    "latitude": 41,
+    "longitude": 75,
     "currencies": [
       {
         "code": "KGS",
@@ -2925,6 +3164,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Vientiane",
+    "latitude": 18,
+    "longitude": 105,
     "currencies": [
       {
         "code": "LAK",
@@ -2948,6 +3189,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Riga",
+    "latitude": 57,
+    "longitude": 25,
     "currencies": [
       {
         "code": "EUR",
@@ -2971,6 +3214,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Beirut",
+    "latitude": 33.83333333,
+    "longitude": 35.83333333,
     "currencies": [
       {
         "code": "LBP",
@@ -2995,6 +3240,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Africa",
     "continent": "Africa",
     "capital": "Maseru",
+    "latitude": -29.5,
+    "longitude": 28.5,
     "currencies": [
       {
         "code": "LSL",
@@ -3024,6 +3271,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Monrovia",
+    "latitude": 6.5,
+    "longitude": -9.5,
     "currencies": [
       {
         "code": "LRD",
@@ -3047,6 +3296,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Africa",
     "continent": "Africa",
     "capital": "Tripoli",
+    "latitude": 25,
+    "longitude": 17,
     "currencies": [
       {
         "code": "LYD",
@@ -3070,6 +3321,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Vaduz",
+    "latitude": 47.26666666,
+    "longitude": 9.53333333,
     "currencies": [
       {
         "code": "CHF",
@@ -3093,6 +3346,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Vilnius",
+    "latitude": 56,
+    "longitude": 24,
     "currencies": [
       {
         "code": "EUR",
@@ -3116,6 +3371,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Luxembourg",
+    "latitude": 49.75,
+    "longitude": 6.16666666,
     "currencies": [
       {
         "code": "EUR",
@@ -3141,6 +3398,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "",
+    "latitude": 22.16666666,
+    "longitude": 113.55,
     "currencies": [
       {
         "code": "MOP",
@@ -3165,6 +3424,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Antananarivo",
+    "latitude": -20,
+    "longitude": 47,
     "currencies": [
       {
         "code": "MGA",
@@ -3189,6 +3450,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Lilongwe",
+    "latitude": -13.5,
+    "longitude": 34,
     "currencies": [
       {
         "code": "MWK",
@@ -3213,6 +3476,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Kuala Lumpur",
+    "latitude": 2.5,
+    "longitude": 112.5,
     "currencies": [
       {
         "code": "MYR",
@@ -3237,6 +3502,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Malé",
+    "latitude": 3.25,
+    "longitude": 73,
     "currencies": [
       {
         "code": "MVR",
@@ -3260,6 +3527,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Bamako",
+    "latitude": 17,
+    "longitude": -4,
     "currencies": [
       {
         "code": "XOF",
@@ -3283,6 +3552,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Valletta",
+    "latitude": 35.83333333,
+    "longitude": 14.58333333,
     "currencies": [
       {
         "code": "EUR",
@@ -3307,6 +3578,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Micronesia",
     "continent": "Oceania",
     "capital": "Majuro",
+    "latitude": 9,
+    "longitude": 168,
     "currencies": [
       {
         "code": "USD",
@@ -3331,6 +3604,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Fort-de-France",
+    "latitude": 14.666667,
+    "longitude": -61,
     "currencies": [
       {
         "code": "EUR",
@@ -3354,6 +3629,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Nouakchott",
+    "latitude": 20,
+    "longitude": -12,
     "currencies": [
       {
         "code": "MRU",
@@ -3377,6 +3654,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Port Louis",
+    "latitude": -20.28333333,
+    "longitude": 57.55,
     "currencies": [
       {
         "code": "MUR",
@@ -3402,6 +3681,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Mamoudzou",
+    "latitude": -12.83333333,
+    "longitude": 45.16666666,
     "currencies": [
       {
         "code": "EUR",
@@ -3425,6 +3706,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "North America",
     "continent": "Americas",
     "capital": "Mexico City",
+    "latitude": 23,
+    "longitude": -102,
     "currencies": [
       {
         "code": "MXN",
@@ -3448,6 +3731,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Micronesia",
     "continent": "Oceania",
     "capital": "Palikir",
+    "latitude": 6.91666666,
+    "longitude": 158.25,
     "currencies": [],
     "languages": [
       "English"
@@ -3465,6 +3750,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Europe",
     "continent": "Europe",
     "capital": "Chișinău",
+    "latitude": 47,
+    "longitude": 29,
     "currencies": [
       {
         "code": "MDL",
@@ -3488,6 +3775,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Monaco",
+    "latitude": 43.73333333,
+    "longitude": 7.4,
     "currencies": [
       {
         "code": "EUR",
@@ -3511,6 +3800,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "Ulan Bator",
+    "latitude": 46,
+    "longitude": 105,
     "currencies": [
       {
         "code": "MNT",
@@ -3534,6 +3825,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Podgorica",
+    "latitude": 42.5,
+    "longitude": 19.3,
     "currencies": [
       {
         "code": "EUR",
@@ -3557,6 +3850,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Plymouth",
+    "latitude": 16.75,
+    "longitude": -62.2,
     "currencies": [
       {
         "code": "XCD",
@@ -3580,6 +3875,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Africa",
     "continent": "Africa",
     "capital": "Rabat",
+    "latitude": 32,
+    "longitude": -5,
     "currencies": [
       {
         "code": "MAD",
@@ -3604,6 +3901,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Maputo",
+    "latitude": -18.25,
+    "longitude": 35,
     "currencies": [
       {
         "code": "MZN",
@@ -3627,6 +3926,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Naypyidaw",
+    "latitude": 22,
+    "longitude": 98,
     "currencies": [
       {
         "code": "MMK",
@@ -3650,6 +3951,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Africa",
     "continent": "Africa",
     "capital": "Windhoek",
+    "latitude": -22,
+    "longitude": 17,
     "currencies": [
       {
         "code": "NAD",
@@ -3686,6 +3989,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Micronesia",
     "continent": "Oceania",
     "capital": "Yaren",
+    "latitude": -0.53333333,
+    "longitude": 166.91666666,
     "currencies": [
       {
         "code": "AUD",
@@ -3710,6 +4015,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Kathmandu",
+    "latitude": 28,
+    "longitude": 84,
     "currencies": [
       {
         "code": "NPR",
@@ -3733,6 +4040,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Amsterdam",
+    "latitude": 52.5,
+    "longitude": 5.75,
     "currencies": [
       {
         "code": "EUR",
@@ -3756,6 +4065,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Melanesia",
     "continent": "Oceania",
     "capital": "Nouméa",
+    "latitude": -21.5,
+    "longitude": 165.5,
     "currencies": [
       {
         "code": "XPF",
@@ -3779,6 +4090,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Australia and New Zealand",
     "continent": "Oceania",
     "capital": "Wellington",
+    "latitude": -41,
+    "longitude": 174,
     "currencies": [
       {
         "code": "NZD",
@@ -3804,6 +4117,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central America",
     "continent": "Americas",
     "capital": "Managua",
+    "latitude": 13,
+    "longitude": -85,
     "currencies": [
       {
         "code": "NIO",
@@ -3827,6 +4142,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Niamey",
+    "latitude": 16,
+    "longitude": 8,
     "currencies": [
       {
         "code": "XOF",
@@ -3850,6 +4167,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Abuja",
+    "latitude": 10,
+    "longitude": 8,
     "currencies": [
       {
         "code": "NGN",
@@ -3873,6 +4192,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Alofi",
+    "latitude": -19.03333333,
+    "longitude": -169.86666666,
     "currencies": [
       {
         "code": "NZD",
@@ -3897,6 +4218,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Australia and New Zealand",
     "continent": "Oceania",
     "capital": "Kingston",
+    "latitude": -29.03333333,
+    "longitude": 167.95,
     "currencies": [
       {
         "code": "AUD",
@@ -3921,6 +4244,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "Pyongyang",
+    "latitude": 40,
+    "longitude": 127,
     "currencies": [
       {
         "code": "KPW",
@@ -3944,6 +4269,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Skopje",
+    "latitude": 41.83333333,
+    "longitude": 22,
     "currencies": [
       {
         "code": "MKD",
@@ -3967,6 +4294,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Micronesia",
     "continent": "Oceania",
     "capital": "Saipan",
+    "latitude": 15.2,
+    "longitude": 145.75,
     "currencies": [
       {
         "code": "USD",
@@ -3992,6 +4321,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Oslo",
+    "latitude": 62,
+    "longitude": 10,
     "currencies": [
       {
         "code": "NOK",
@@ -4017,6 +4348,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Muscat",
+    "latitude": 21,
+    "longitude": 57,
     "currencies": [
       {
         "code": "OMR",
@@ -4040,6 +4373,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Islamabad",
+    "latitude": 30,
+    "longitude": 70,
     "currencies": [
       {
         "code": "PKR",
@@ -4064,6 +4399,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Micronesia",
     "continent": "Oceania",
     "capital": "Ngerulmud",
+    "latitude": 7.5,
+    "longitude": 134.5,
     "currencies": [
       {
         "code": "USD",
@@ -4088,6 +4425,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Ramallah",
+    "latitude": 31.9,
+    "longitude": 35.2,
     "currencies": [
       {
         "code": "EGP",
@@ -4121,6 +4460,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central America",
     "continent": "Americas",
     "capital": "Panama City",
+    "latitude": 9,
+    "longitude": -80,
     "currencies": [
       {
         "code": "PAB",
@@ -4149,6 +4490,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Melanesia",
     "continent": "Oceania",
     "capital": "Port Moresby",
+    "latitude": -6,
+    "longitude": 147,
     "currencies": [
       {
         "code": "PGK",
@@ -4174,6 +4517,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Asunción",
+    "latitude": -23,
+    "longitude": -58,
     "currencies": [
       {
         "code": "PYG",
@@ -4198,6 +4543,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Lima",
+    "latitude": -10,
+    "longitude": -76,
     "currencies": [
       {
         "code": "PEN",
@@ -4223,6 +4570,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Manila",
+    "latitude": 13,
+    "longitude": 122,
     "currencies": [
       {
         "code": "PHP",
@@ -4247,6 +4596,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Adamstown",
+    "latitude": -25.06666666,
+    "longitude": -130.1,
     "currencies": [
       {
         "code": "NZD",
@@ -4270,6 +4621,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Europe",
     "continent": "Europe",
     "capital": "Warsaw",
+    "latitude": 52,
+    "longitude": 20,
     "currencies": [
       {
         "code": "PLN",
@@ -4293,6 +4646,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Lisbon",
+    "latitude": 39.5,
+    "longitude": -8,
     "currencies": [
       {
         "code": "EUR",
@@ -4316,6 +4671,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "San Juan",
+    "latitude": 18.25,
+    "longitude": -66.5,
     "currencies": [
       {
         "code": "USD",
@@ -4340,6 +4697,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Doha",
+    "latitude": 25.5,
+    "longitude": 51.25,
     "currencies": [
       {
         "code": "QAR",
@@ -4363,6 +4722,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Saint-Denis",
+    "latitude": -21.15,
+    "longitude": 55.5,
     "currencies": [
       {
         "code": "EUR",
@@ -4386,6 +4747,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Bucharest",
+    "latitude": 46,
+    "longitude": 25,
     "currencies": [
       {
         "code": "RON",
@@ -4409,6 +4772,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Europe",
     "continent": "Europe",
     "capital": "Moscow",
+    "latitude": 60,
+    "longitude": 100,
     "currencies": [
       {
         "code": "RUB",
@@ -4432,6 +4797,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Kigali",
+    "latitude": -2,
+    "longitude": 30,
     "currencies": [
       {
         "code": "RWF",
@@ -4457,6 +4824,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Gustavia",
+    "latitude": 18.5,
+    "longitude": -63.41666666,
     "currencies": [
       {
         "code": "EUR",
@@ -4480,6 +4849,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Jamestown",
+    "latitude": -15.95,
+    "longitude": -5.72,
     "currencies": [
       {
         "code": "GBP",
@@ -4508,6 +4879,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Basseterre",
+    "latitude": 17.33333333,
+    "longitude": -62.75,
     "currencies": [
       {
         "code": "XCD",
@@ -4531,6 +4904,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Castries",
+    "latitude": 13.88333333,
+    "longitude": -60.96666666,
     "currencies": [
       {
         "code": "XCD",
@@ -4554,6 +4929,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Marigot",
+    "latitude": 18.08333333,
+    "longitude": -63.95,
     "currencies": [
       {
         "code": "EUR",
@@ -4577,6 +4954,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "North America",
     "continent": "Americas",
     "capital": "Saint-Pierre",
+    "latitude": 46.83333333,
+    "longitude": -56.33333333,
     "currencies": [
       {
         "code": "EUR",
@@ -4600,6 +4979,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Kingstown",
+    "latitude": 13.25,
+    "longitude": -61.2,
     "currencies": [
       {
         "code": "XCD",
@@ -4623,6 +5004,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Apia",
+    "latitude": -13.58333333,
+    "longitude": -172.33333333,
     "currencies": [
       {
         "code": "WST",
@@ -4647,6 +5030,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "City of San Marino",
+    "latitude": 43.76666666,
+    "longitude": 12.41666666,
     "currencies": [
       {
         "code": "EUR",
@@ -4670,6 +5055,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "São Tomé",
+    "latitude": 1,
+    "longitude": 7,
     "currencies": [
       {
         "code": "STN",
@@ -4693,6 +5080,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Riyadh",
+    "latitude": 25,
+    "longitude": 45,
     "currencies": [
       {
         "code": "SAR",
@@ -4716,6 +5105,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Dakar",
+    "latitude": 14,
+    "longitude": -14,
     "currencies": [
       {
         "code": "XOF",
@@ -4739,6 +5130,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southeast Europe",
     "continent": "Europe",
     "capital": "Belgrade",
+    "latitude": 44,
+    "longitude": 21,
     "currencies": [
       {
         "code": "RSD",
@@ -4762,6 +5155,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Victoria",
+    "latitude": -4.58333333,
+    "longitude": 55.66666666,
     "currencies": [
       {
         "code": "SCR",
@@ -4787,6 +5182,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Freetown",
+    "latitude": 8.5,
+    "longitude": -11.5,
     "currencies": [
       {
         "code": "SLE",
@@ -4810,6 +5207,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Singapore",
+    "latitude": 1.36666666,
+    "longitude": 103.8,
     "currencies": [
       {
         "code": "SGD",
@@ -4836,11 +5235,13 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Philipsburg",
+    "latitude": 18.033333,
+    "longitude": -63.05,
     "currencies": [
       {
-        "code": "ANG",
-        "name": "Netherlands Antillean guilder",
-        "symbol": "ƒ"
+        "code": "XCG",
+        "name": "Caribbean guilder",
+        "symbol": "Cg"
       }
     ],
     "languages": [
@@ -4861,6 +5262,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Europe",
     "continent": "Europe",
     "capital": "Bratislava",
+    "latitude": 48.66666666,
+    "longitude": 19.5,
     "currencies": [
       {
         "code": "EUR",
@@ -4884,6 +5287,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Europe",
     "continent": "Europe",
     "capital": "Ljubljana",
+    "latitude": 46.11666666,
+    "longitude": 14.81666666,
     "currencies": [
       {
         "code": "EUR",
@@ -4907,6 +5312,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Melanesia",
     "continent": "Oceania",
     "capital": "Honiara",
+    "latitude": -8,
+    "longitude": 159,
     "currencies": [
       {
         "code": "SBD",
@@ -4930,6 +5337,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Mogadishu",
+    "latitude": 10,
+    "longitude": 49,
     "currencies": [
       {
         "code": "SOS",
@@ -4954,6 +5363,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Africa",
     "continent": "Africa",
     "capital": "Pretoria",
+    "latitude": -29,
+    "longitude": 24,
     "currencies": [
       {
         "code": "ZAR",
@@ -4987,6 +5398,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Antarctic",
     "continent": "Antarctic",
     "capital": "King Edward Point",
+    "latitude": -54.5,
+    "longitude": -37,
     "currencies": [
       {
         "code": "SHP",
@@ -5010,6 +5423,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "Seoul",
+    "latitude": 37,
+    "longitude": 127.5,
     "currencies": [
       {
         "code": "KRW",
@@ -5033,6 +5448,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Middle Africa",
     "continent": "Africa",
     "capital": "Juba",
+    "latitude": 7,
+    "longitude": 30,
     "currencies": [
       {
         "code": "SSP",
@@ -5056,6 +5473,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Madrid",
+    "latitude": 40,
+    "longitude": -4,
     "currencies": [
       {
         "code": "EUR",
@@ -5079,6 +5498,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Asia",
     "continent": "Asia",
     "capital": "Colombo",
+    "latitude": 7,
+    "longitude": 81,
     "currencies": [
       {
         "code": "LKR",
@@ -5103,6 +5524,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Africa",
     "continent": "Africa",
     "capital": "Khartoum",
+    "latitude": 15,
+    "longitude": 30,
     "currencies": [
       {
         "code": "SDG",
@@ -5127,6 +5550,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Paramaribo",
+    "latitude": 4,
+    "longitude": -56,
     "currencies": [
       {
         "code": "SRD",
@@ -5150,6 +5575,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Longyearbyen",
+    "latitude": 78,
+    "longitude": 20,
     "currencies": [
       {
         "code": "NOK",
@@ -5173,6 +5600,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "Stockholm",
+    "latitude": 62,
+    "longitude": 15,
     "currencies": [
       {
         "code": "SEK",
@@ -5196,6 +5625,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Europe",
     "continent": "Europe",
     "capital": "Bern",
+    "latitude": 47,
+    "longitude": 8,
     "currencies": [
       {
         "code": "CHF",
@@ -5222,6 +5653,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Damascus",
+    "latitude": 35,
+    "longitude": 38,
     "currencies": [
       {
         "code": "SYP",
@@ -5245,6 +5678,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Asia",
     "continent": "Asia",
     "capital": "Taipei",
+    "latitude": 23.5,
+    "longitude": 121,
     "currencies": [
       {
         "code": "TWD",
@@ -5268,6 +5703,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Asia",
     "continent": "Asia",
     "capital": "Dushanbe",
+    "latitude": 39,
+    "longitude": 71,
     "currencies": [
       {
         "code": "TJS",
@@ -5292,6 +5729,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Dodoma",
+    "latitude": -6,
+    "longitude": 35,
     "currencies": [
       {
         "code": "TZS",
@@ -5316,6 +5755,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Bangkok",
+    "latitude": 15,
+    "longitude": 100,
     "currencies": [
       {
         "code": "THB",
@@ -5339,6 +5780,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Dili",
+    "latitude": -8.83333333,
+    "longitude": 125.91666666,
     "currencies": [
       {
         "code": "USD",
@@ -5363,6 +5806,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Africa",
     "continent": "Africa",
     "capital": "Lomé",
+    "latitude": 8,
+    "longitude": 1.16666666,
     "currencies": [
       {
         "code": "XOF",
@@ -5386,6 +5831,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Fakaofo",
+    "latitude": -9,
+    "longitude": -172,
     "currencies": [
       {
         "code": "NZD",
@@ -5411,6 +5858,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Nuku'alofa",
+    "latitude": -20,
+    "longitude": -175,
     "currencies": [
       {
         "code": "TOP",
@@ -5435,6 +5884,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Port of Spain",
+    "latitude": 11,
+    "longitude": -61,
     "currencies": [
       {
         "code": "TTD",
@@ -5458,6 +5909,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Africa",
     "continent": "Africa",
     "capital": "Tunis",
+    "latitude": 34,
+    "longitude": 9,
     "currencies": [
       {
         "code": "TND",
@@ -5481,6 +5934,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Asia",
     "continent": "Asia",
     "capital": "Ashgabat",
+    "latitude": 40,
+    "longitude": 60,
     "currencies": [
       {
         "code": "TMT",
@@ -5505,6 +5960,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Cockburn Town",
+    "latitude": 21.75,
+    "longitude": -71.58333333,
     "currencies": [
       {
         "code": "USD",
@@ -5528,6 +5985,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Funafuti",
+    "latitude": -8,
+    "longitude": 178,
     "currencies": [
       {
         "code": "AUD",
@@ -5557,6 +6016,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Ankara",
+    "latitude": 39,
+    "longitude": 35,
     "currencies": [
       {
         "code": "TRY",
@@ -5580,6 +6041,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Kampala",
+    "latitude": 1,
+    "longitude": 32,
     "currencies": [
       {
         "code": "UGX",
@@ -5604,6 +6067,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Europe",
     "continent": "Europe",
     "capital": "Kyiv",
+    "latitude": 49,
+    "longitude": 32,
     "currencies": [
       {
         "code": "UAH",
@@ -5627,6 +6092,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Abu Dhabi",
+    "latitude": 24,
+    "longitude": 54,
     "currencies": [
       {
         "code": "AED",
@@ -5650,6 +6117,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Europe",
     "continent": "Europe",
     "capital": "London",
+    "latitude": 54,
+    "longitude": -2,
     "currencies": [
       {
         "code": "GBP",
@@ -5673,6 +6142,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "North America",
     "continent": "Americas",
     "capital": "Washington D.C.",
+    "latitude": 38,
+    "longitude": -97,
     "currencies": [
       {
         "code": "USD",
@@ -5696,6 +6167,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "North America",
     "continent": "Americas",
     "capital": "",
+    "latitude": 19.3,
+    "longitude": 166.633333,
     "currencies": [
       {
         "code": "USD",
@@ -5719,6 +6192,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Caribbean",
     "continent": "Americas",
     "capital": "Charlotte Amalie",
+    "latitude": 18.35,
+    "longitude": -64.933333,
     "currencies": [
       {
         "code": "USD",
@@ -5742,6 +6217,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Montevideo",
+    "latitude": -33,
+    "longitude": -56,
     "currencies": [
       {
         "code": "UYU",
@@ -5765,6 +6242,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Central Asia",
     "continent": "Asia",
     "capital": "Tashkent",
+    "latitude": 41,
+    "longitude": 64,
     "currencies": [
       {
         "code": "UZS",
@@ -5789,6 +6268,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Melanesia",
     "continent": "Oceania",
     "capital": "Port Vila",
+    "latitude": -16,
+    "longitude": 167,
     "currencies": [
       {
         "code": "VUV",
@@ -5814,6 +6295,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Southern Europe",
     "continent": "Europe",
     "capital": "Vatican City",
+    "latitude": 41.9,
+    "longitude": 12.45,
     "currencies": [
       {
         "code": "EUR",
@@ -5838,6 +6321,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South America",
     "continent": "Americas",
     "capital": "Caracas",
+    "latitude": 8,
+    "longitude": -66,
     "currencies": [
       {
         "code": "VES",
@@ -5861,6 +6346,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "South-Eastern Asia",
     "continent": "Asia",
     "capital": "Hanoi",
+    "latitude": 16.16666666,
+    "longitude": 107.83333333,
     "currencies": [
       {
         "code": "VND",
@@ -5884,6 +6371,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Polynesia",
     "continent": "Oceania",
     "capital": "Mata-Utu",
+    "latitude": -13.3,
+    "longitude": -176.2,
     "currencies": [
       {
         "code": "XPF",
@@ -5907,6 +6396,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Northern Africa",
     "continent": "Africa",
     "capital": "El Aaiún",
+    "latitude": 24.5,
+    "longitude": -13,
     "currencies": [
       {
         "code": "DZD",
@@ -5942,6 +6433,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Western Asia",
     "continent": "Asia",
     "capital": "Sana'a",
+    "latitude": 15,
+    "longitude": 48,
     "currencies": [
       {
         "code": "YER",
@@ -5965,6 +6458,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Lusaka",
+    "latitude": -15,
+    "longitude": 30,
     "currencies": [
       {
         "code": "ZMW",
@@ -5988,6 +6483,8 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
     "region": "Eastern Africa",
     "continent": "Africa",
     "capital": "Harare",
+    "latitude": -20,
+    "longitude": 30,
     "currencies": [
       {
         "code": "BWP",
@@ -6030,9 +6527,9 @@ export const countryBaseData: Record<string, CountryBaseInfo> = {
         "symbol": "Rs"
       },
       {
-        "code": "ZWB",
-        "name": "Zimbabwean bonds",
-        "symbol": "$"
+        "code": "ZWG",
+        "name": "Zimbabwe Gold",
+        "symbol": "ZiG"
       }
     ],
     "languages": [

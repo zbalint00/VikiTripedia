@@ -1,10 +1,11 @@
-import { css } from "@emotion/css";
 import {
   ComposableMap,
   Geographies,
   Geography,
   ZoomableGroup,
+  Marker,
 } from "react-simple-maps";
+
 import { countryData } from "../../data/countryData";
 import type { WorldMapProps } from "./type";
 import { styles } from "./styles";
@@ -18,31 +19,6 @@ const countryByNumericCode = new Map(
     .map((country) => [country.numericCode, country]),
 );
 
-const selectedPulse = css`
-  @keyframes selected-country-pulse {
-    0%,
-    100% {
-      stroke: #2563eb;
-      stroke-width: 2px;
-      stroke-opacity: 1;
-    }
-    50% {
-      stroke: #60a5fa;
-      stroke-width: 4px;
-      stroke-opacity: 0.55;
-    }
-  }
-
-  animation: selected-country-pulse 2.4s ease-in-out infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-    stroke: #2563eb;
-    stroke-width: 3px;
-    stroke-opacity: 1;
-  }
-`;
-
 function getCountryColor(
   countryId: string,
   isIn: WorldMapProps["isIn"],
@@ -55,7 +31,63 @@ function getCountryColor(
   return "#E8D5B0";
 }
 
-export default function WorldMap({ selected, onSelect, isIn }: WorldMapProps) {
+export default function WorldMap({
+  selected,
+  onSelect,
+  isIn,
+  destinations,
+  selectedCity,
+  onCitySelect,
+}: WorldMapProps) {
+  const center: [number, number] = selectedCity
+    ? [selectedCity.longitude, selectedCity.latitude]
+    : selected?.latitude != null && selected?.longitude != null
+      ? [selected.longitude, selected.latitude]
+      : [0, 20];
+
+  const countryZoom: Record<string, number> = {
+    // Nagyon kicsi országok
+    MC: 12,
+    VA: 12,
+    SM: 10,
+    LI: 9,
+    AD: 8,
+    LU: 7,
+    MT: 8,
+    SG: 8,
+
+    // Kisebb országok
+    BE: 5,
+    NL: 4.5,
+    CH: 4.5,
+    AT: 3.8,
+    CZ: 3.8,
+    HU: 3.8,
+    SK: 4,
+    SI: 5,
+    HR: 3.5,
+    DK: 3.5,
+
+    // Nagyobb országok
+    FR: 2.5,
+    DE: 2.7,
+    ES: 2.2,
+    IT: 2.5,
+    GB: 2.7,
+    PL: 2.5,
+    TR: 2.2,
+    US: 1.8,
+    CN: 1.7,
+    BR: 1.7,
+    RU: 1.2,
+  };
+
+  const zoom = selectedCity
+    ? 5
+    : selected
+      ? (countryZoom[selected.alpha2?.toUpperCase() ?? ""] ?? 2.5)
+      : 1;
+
   return (
     <ComposableMap
       projection="geoEqualEarth"
@@ -63,14 +95,17 @@ export default function WorldMap({ selected, onSelect, isIn }: WorldMapProps) {
       height={520}
       style={styles.mapStyle}
     >
-      <ZoomableGroup>
+      <ZoomableGroup center={center} zoom={zoom} minZoom={1} maxZoom={14}>
         <Geographies geography={GEO_URL}>
           {({ geographies }) =>
             geographies.map((geo) => {
               const numericCode = String(geo.id ?? "").padStart(3, "0");
               const country = countryByNumericCode.get(numericCode);
 
-              const isSelected = selected?.id === country?.id;
+              const isSelected = Boolean(
+                selected && country && selected.id === country.id,
+              );
+
               const countryColor = country
                 ? getCountryColor(country.id, isIn)
                 : "#E8D5B0";
@@ -80,9 +115,11 @@ export default function WorldMap({ selected, onSelect, isIn }: WorldMapProps) {
                   key={geo.rsmKey}
                   geography={geo}
                   onClick={() => {
-                    if (country) onSelect(country);
+                    if (country) {
+                      onSelect(country);
+                    }
                   }}
-                  className={isSelected ? selectedPulse : undefined}
+                  className={isSelected ? styles.selectedPulse : undefined}
                   fill={countryColor}
                   stroke={isSelected ? "#2563EB" : "#FFFFFF"}
                   strokeWidth={isSelected ? 2 : 0.6}
@@ -92,6 +129,42 @@ export default function WorldMap({ selected, onSelect, isIn }: WorldMapProps) {
             })
           }
         </Geographies>
+
+        {/* Városjelölők kizárólag kiválasztott ország esetén */}
+        {selected &&
+          destinations.map((city) => (
+            <Marker key={city.id} coordinates={[city.longitude, city.latitude]}>
+              <g
+                onClick={() => onCitySelect(city)}
+                style={{ cursor: "pointer" }}
+              >
+                <text
+                  textAnchor="middle"
+                  y={0}
+                  fontSize={8}
+                  fill="#EF476F"
+                  stroke="#FFFFFF"
+                  strokeWidth={0.7}
+                  paintOrder="stroke"
+                >
+                  ♥
+                </text>
+
+                <text
+                  textAnchor="middle"
+                  y={11}
+                  fontSize={4}
+                  fontWeight={600}
+                  fill="#263238"
+                  stroke="#FFFFFF"
+                  strokeWidth={1.5}
+                  paintOrder="stroke"
+                >
+                  {city.name}
+                </text>
+              </g>
+            </Marker>
+          ))}
       </ZoomableGroup>
     </ComposableMap>
   );

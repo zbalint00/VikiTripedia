@@ -59,9 +59,29 @@ const panelTop = css`
   margin-bottom: 20px;
 `;
 const panelFlag = css`
+  position: relative;
+  width: 68px;
+  height: 46px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: ${t.bg};
   font-size: 2.5rem;
-  margin-bottom: 8px;
+  overflow: hidden;
 `;
+
+const panelFlagImage = css`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 5px;
+  background: ${t.card};
+`;
+
 const panelTitle = css`
   font-family: ${t.fontDisplay};
   font-size: 1.5rem;
@@ -104,6 +124,143 @@ const infoCardAccent = css`
   border: 1px solid ${t.border};
   margin-bottom: 12px;
 `;
+
+const climateCard = css`
+  padding: 16px;
+  border-radius: 12px;
+  background: ${t.bg};
+  border: 1px solid ${t.border};
+  margin-bottom: 12px;
+`;
+
+const climateDescription = css`
+  margin: 4px 0 14px;
+  font-size: 0.75rem;
+  color: ${t.mutedFg};
+  line-height: 1.5;
+`;
+
+const climateStatus = css`
+  padding: 12px;
+  border-radius: 10px;
+  background: ${t.secondary};
+  color: ${t.secondaryFg};
+  font-size: 0.8rem;
+  line-height: 1.5;
+`;
+
+const climateError = css`
+  padding: 12px;
+  border-radius: 10px;
+  background: #fff0f0;
+  color: #a83232;
+  font-size: 0.8rem;
+  line-height: 1.5;
+`;
+
+const climateSummary = css`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+`;
+
+const climateSummaryItem = css`
+  padding: 10px;
+  border-radius: 10px;
+  background: ${t.card};
+  border: 1px solid ${t.border};
+`;
+
+const climateSummaryLabel = css`
+  display: block;
+  font-size: 0.68rem;
+  color: ${t.mutedFg};
+  margin-bottom: 4px;
+`;
+
+const climateSummaryValue = css`
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: ${t.fg};
+`;
+
+const climateChart = css`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const climateMonth = css`
+  display: grid;
+  grid-template-columns: 74px 1fr 42px;
+  align-items: center;
+  gap: 8px;
+`;
+
+const climateMonthName = css`
+  font-size: 0.75rem;
+  color: ${t.secondaryFg};
+`;
+
+const climateBarTrack = css`
+  height: 9px;
+  border-radius: 20px;
+  background: ${t.border};
+  overflow: hidden;
+`;
+
+const climateBar = css`
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #60a5fa, #f59e0b);
+  transition: width 0.3s ease;
+`;
+
+const climateTemperature = css`
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: ${t.fg};
+  text-align: right;
+`;
+
+const climateDetails = css`
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid ${t.border};
+`;
+
+const climateDetailRow = css`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: ${t.fg};
+`;
+
+const climateDetailLabel = css`
+  color: ${t.mutedFg};
+`;
+
+const climateAttribution = css`
+  margin-top: 14px;
+  font-size: 0.68rem;
+  color: ${t.mutedFg};
+
+  a {
+    color: ${t.primary};
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+`;
+
 const infoRow = css`
   display: flex;
   align-items: center;
@@ -298,6 +455,31 @@ const mapStyle = {
   display: "block",
 } as const;
 
+const selectedPulse = css`
+  @keyframes selected-country-pulse {
+    0%,
+    100% {
+      stroke: #2563eb;
+      stroke-width: 2px;
+      stroke-opacity: 1;
+    }
+    50% {
+      stroke: #60a5fa;
+      stroke-width: 4px;
+      stroke-opacity: 0.55;
+    }
+  }
+
+  animation: selected-country-pulse 2.4s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    stroke: #2563eb;
+    stroke-width: 3px;
+    stroke-opacity: 1;
+  }
+`;
+
 const countryStyle = {
   outline: "none",
   cursor: "pointer",
@@ -335,11 +517,30 @@ export const styles = {
   panelInner,
   panelTop,
   panelFlag,
+  panelFlagImage,
   panelTitle,
   panelRegion,
   closeBtn,
   infoCard,
   infoCardAccent,
+  climateCard,
+  climateDescription,
+  climateStatus,
+  climateError,
+  climateSummary,
+  climateSummaryItem,
+  climateSummaryLabel,
+  climateSummaryValue,
+  climateChart,
+  climateMonth,
+  climateMonthName,
+  climateBarTrack,
+  climateBar,
+  climateTemperature,
+  climateDetails,
+  climateDetailRow,
+  climateDetailLabel,
+  climateAttribution,
   infoRow,
   infoIcon,
   infoLabel,
@@ -358,6 +559,7 @@ export const styles = {
   listBtnInactive,
   toast,
   mapStyle,
+  selectedPulse,
   countryStyle,
   countryHoverStyle,
   countryPressedStyle,
