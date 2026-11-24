@@ -218,7 +218,12 @@ export default function MapPage() {
 
   function showToast(msg: string) {
     setToastMsg(msg);
-    setTimeout(() => setToastMsg(null), 2500);
+    window.clearTimeout(
+      (showToast as typeof showToast & { timer?: number }).timer,
+    );
+
+    (showToast as typeof showToast & { timer?: number }).timer =
+      window.setTimeout(() => setToastMsg(null), 2500);
   }
 
   function handleListToggle(list: ListName, country: CountryInfo) {

@@ -56,10 +56,8 @@ async function compressImage(file: File): Promise<File> {
   const bitmap = await createImageBitmap(file);
 
   try {
-    const maxSize = 1600;
     const maxBytes = 400 * 1024;
-
-    let scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
+    let scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
 
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
@@ -68,7 +66,6 @@ async function compressImage(file: File): Promise<File> {
       throw new Error("Nem sikerült előkészíteni a képet.");
     }
 
-    // Többször próbálkozunk, ha a kép túl nagy marad.
     for (const dimension of [1600, 1400, 1200]) {
       scale = Math.min(
         scale,
@@ -82,7 +79,7 @@ async function compressImage(file: File): Promise<File> {
       context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
 
       for (const quality of [0.8, 0.7, 0.6]) {
-        const blob = await new Promise<Blob>((resolve, reject) => {
+        let output = await new Promise<Blob>((resolve, reject) => {
           canvas.toBlob(
             (result) => {
               if (result) resolve(result);
@@ -93,10 +90,7 @@ async function compressImage(file: File): Promise<File> {
           );
         });
 
-        // Ha a böngésző nem támogatja a WebP-t, használjunk JPEG-et.
-        let output = blob;
-
-        if (blob.type !== "image/webp") {
+        if (output.type !== "image/webp") {
           output = await new Promise<Blob>((resolve, reject) => {
             canvas.toBlob(
               (result) => {
@@ -143,7 +137,7 @@ function PhotoCard({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div
+    <article
       className={s.photoWrap}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -152,14 +146,13 @@ function PhotoCard({
         src={photo.url}
         alt={photo.caption}
         className={s.photoImg}
-        onError={(e) => {
-          (e.target as HTMLImageElement).src =
-            "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=300&fit=crop";
-        }}
+        loading="lazy"
       />
+
       <div className={cx(s.photoOverlay, hovered ? s.photoOverlayVisible : "")}>
         <p className={s.photoCaption}>{photo.caption}</p>
       </div>
+
       {photo.storagePath && (
         <button
           type="button"
@@ -170,7 +163,7 @@ function PhotoCard({
           ✕
         </button>
       )}
-    </div>
+    </article>
   );
 }
 
@@ -179,61 +172,81 @@ export default function MemoriesPage() {
     () => quotes[Math.floor(Math.random() * quotes.length)],
     [],
   );
+
   const [photos, setPhotos] = useState<Photo[]>(initialPhotos);
   const [showAdd, setShowAdd] = useState(false);
   const [newFile, setNewFile] = useState<File | null>(null);
   const [newCaption, setNewCaption] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadPhotos() {
-      const { data: authData, error: authError } =
-        await supabase.auth.getUser();
+      try {
+        const { data: authData, error: authError } =
+          await supabase.auth.getUser();
 
-      if (authError || !authData.user) {
-        if (!cancelled) {
-          setErrorMessage("A képek betöltéséhez jelentkezz be.");
+        if (authError || !authData.user) {
+          if (!cancelled) {
+            setErrorMessage("A képek betöltéséhez jelentkezz be.");
+          }
+          return;
         }
-        return;
-      }
 
-      const { data, error } = await supabase
-        .from("memories")
-        .select("id, image_path, caption")
-        .order("created_at", { ascending: false });
+        const { data, error } = await supabase
+          .from("memories")
+          .select("id, image_path, caption")
+          .order("created_at", { ascending: false });
 
-      if (error) {
-        if (!cancelled) {
-          setErrorMessage(`Nem sikerült betölteni a képeket: ${error.message}`);
+        if (error) {
+          throw error;
         }
-        return;
-      }
 
-      const savedPhotos = (
-        await Promise.all(
-          data.map(async (item): Promise<Photo | null> => {
-            const { data: signedData, error: signedError } =
-              await supabase.storage
-                .from("memories")
-                .createSignedUrl(item.image_path, 60 * 60 * 24 * 7);
+        const savedPhotos = (
+          await Promise.all(
+            data.map(async (item): Promise<Photo | null> => {
+              const { data: signedData, error: signedError } =
+                await supabase.storage
+                  .from("memories")
+                  .createSignedUrl(item.image_path, 60 * 60 * 24 * 7);
 
-            if (signedError || !signedData) return null;
+              if (signedError || !signedData) {
+                console.error(
+                  "Nem sikerült aláírt URL-t készíteni:",
+                  signedError,
+                );
+                return null;
+              }
 
-            return {
-              id: item.id,
-              url: signedData.signedUrl,
-              caption: item.caption,
-              storagePath: item.image_path,
-            };
-          }),
-        )
-      ).filter((photo): photo is Photo => photo !== null);
+              return {
+                id: item.id,
+                url: signedData.signedUrl,
+                caption: item.caption,
+                storagePath: item.image_path,
+              };
+            }),
+          )
+        ).filter((photo): photo is Photo => photo !== null);
 
-      if (!cancelled) {
-        setPhotos([...initialPhotos, ...savedPhotos]);
+        if (!cancelled) {
+          setPhotos([...initialPhotos, ...savedPhotos]);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setErrorMessage(
+            error instanceof Error
+              ? `Nem sikerült betölteni a képeket: ${error.message}`
+              : "Nem sikerült betölteni a képeket.",
+          );
+        }
+      } finally {
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       }
     }
 
@@ -319,6 +332,14 @@ export default function MemoriesPage() {
       setNewFile(null);
       setNewCaption("");
       setShowAdd(false);
+
+      const fileInput = document.getElementById(
+        "memory-file-input",
+      ) as HTMLInputElement | null;
+
+      if (fileInput) {
+        fileInput.value = "";
+      }
     } catch (error) {
       if (uploadedPath) {
         await supabase.storage.from("memories").remove([uploadedPath]);
@@ -335,72 +356,111 @@ export default function MemoriesPage() {
   }
 
   async function removePhoto(id: string) {
+    if (deletingId) return;
+
     const photo = photos.find((item) => item.id === id);
 
-    // A projektbe beépített képek nem Supabase-fájlok.
     if (!photo?.storagePath) return;
 
+    setDeletingId(id);
     setErrorMessage("");
 
-    const { error: storageError } = await supabase.storage
-      .from("memories")
-      .remove([photo.storagePath]);
+    try {
+      const { error: storageError } = await supabase.storage
+        .from("memories")
+        .remove([photo.storagePath]);
 
-    if (storageError) {
-      setErrorMessage(`Nem sikerült törölni a képet: ${storageError.message}`);
-      return;
-    }
+      if (storageError) {
+        throw new Error(
+          `Nem sikerült törölni a képet: ${storageError.message}`,
+        );
+      }
 
-    const { error: databaseError } = await supabase
-      .from("memories")
-      .delete()
-      .eq("id", id);
+      const { error: databaseError } = await supabase
+        .from("memories")
+        .delete()
+        .eq("id", id);
 
-    if (databaseError) {
+      if (databaseError) {
+        throw new Error(
+          `A fájl törlődött, de az adatbázis frissítése sikertelen: ${databaseError.message}`,
+        );
+      }
+
+      setPhotos((current) => current.filter((item) => item.id !== id));
+    } catch (error) {
       setErrorMessage(
-        `A fájl törlődött, de az adatbázis frissítése sikertelen: ${databaseError.message}`,
+        error instanceof Error
+          ? error.message
+          : "Nem sikerült törölni az emléket.",
       );
-      return;
+    } finally {
+      setDeletingId(null);
     }
-
-    setPhotos((current) => current.filter((item) => item.id !== id));
   }
 
   return (
     <div className={styles.page}>
-      <div className={styles.heroSection}>
+      <section className={styles.heroSection}>
         <div className={styles.heroBg} />
+
         <div className={styles.heroInner}>
           <p className={styles.heroLabel}>Ez a mi kis sarkunk</p>
           <h1 className={styles.heroTitle}>Viki & Bálint ♡</h1>
           <p className={styles.heroQuote}>"{heroQuote}"</p>
         </div>
-      </div>
+      </section>
 
       <div className={styles.quoteStrip}>
-        {quotes.map((q, i) => (
-          <span key={i} className={styles.quoteItem}>
-            ♡ {q} ♡
+        {quotes.map((quote, index) => (
+          <span key={index} className={styles.quoteItem}>
+            ♡ {quote} ♡
           </span>
         ))}
       </div>
 
-      <div className={styles.gridSection}>
+      <main className={styles.gridSection}>
         <div className={styles.gridHeader}>
           <h2 className={styles.gridTitle}>Az emlékeink</h2>
+
           <button
+            type="button"
             className={styles.addBtn}
-            onClick={() => setShowAdd(!showAdd)}
+            onClick={() => {
+              setShowAdd((current) => !current);
+              setErrorMessage("");
+            }}
+            aria-expanded={showAdd}
           >
-            <span>+</span> Tölts fel egy új emléket
+            <span aria-hidden="true">+</span>
+            {showAdd ? "Bezárás" : "Tölts fel egy új emléket"}
           </button>
         </div>
 
+        {errorMessage && (
+          <div className={styles.errorBanner} role="alert">
+            <span>{errorMessage}</span>
+            <button
+              type="button"
+              onClick={() => setErrorMessage("")}
+              aria-label="Hibaüzenet bezárása"
+            >
+              ✕
+            </button>
+          </div>
+        )}
+
         {showAdd && (
-          <div className={styles.addForm}>
+          <section className={styles.addForm}>
             <h3 className={styles.addFormTitle}>Adj hozzá egy új emléket</h3>
+
             <div className={styles.addFormInputs}>
+              <label htmlFor="memory-file-input" className={styles.fileLabel}>
+                Válassz egy képet
+              </label>
+
               <input
+                id="memory-file-input"
                 type="file"
                 accept="image/*"
                 onChange={(event) => {
@@ -408,7 +468,14 @@ export default function MemoriesPage() {
                   setErrorMessage("");
                 }}
                 className={styles.formInput}
+                disabled={isUploading}
               />
+
+              {newFile && (
+                <p className={styles.selectedFile}>
+                  Kiválasztva: {newFile.name}
+                </p>
+              )}
 
               <input
                 type="text"
@@ -417,12 +484,17 @@ export default function MemoriesPage() {
                 placeholder="Kép felirata (nem kötelező)"
                 className={styles.formInput}
                 maxLength={200}
+                disabled={isUploading}
               />
 
-              {errorMessage && <p role="alert">{errorMessage}</p>}
+              <div className={styles.formHint}>
+                Maximum 20 MB-os képet válassz. Feltöltés előtt automatikusan
+                tömörítjük.
+              </div>
 
               <div className={styles.formActions}>
                 <button
+                  type="button"
                   className={styles.formSubmit}
                   onClick={() => void addPhoto()}
                   disabled={!newFile || isUploading}
@@ -431,10 +503,12 @@ export default function MemoriesPage() {
                 </button>
 
                 <button
+                  type="button"
                   className={styles.formCancel}
                   onClick={() => {
                     setShowAdd(false);
                     setNewFile(null);
+                    setNewCaption("");
                     setErrorMessage("");
                   }}
                   disabled={isUploading}
@@ -443,7 +517,11 @@ export default function MemoriesPage() {
                 </button>
               </div>
             </div>
-          </div>
+          </section>
+        )}
+
+        {isLoading && (
+          <p className={styles.loadingMessage}>Emlékek betöltése...</p>
         )}
 
         <div className={styles.masonry}>
@@ -451,18 +529,22 @@ export default function MemoriesPage() {
             <PhotoCard
               key={photo.id}
               photo={photo}
-              onRemove={removePhoto}
+              onRemove={(id) => void removePhoto(id)}
               photoStyles={styles}
             />
           ))}
         </div>
-      </div>
 
-      <div className={styles.footer}>
+        {deletingId && (
+          <p className={styles.loadingMessage}>Emlék törlése...</p>
+        )}
+      </main>
+
+      <footer className={styles.footer}>
         <p className={styles.footerHeart}>♡</p>
         <p className={styles.footerQuote}>"Ott az otthonom, ahol Te vársz."</p>
         <p className={styles.footerQuote}>Szeretlek!</p>
-      </div>
+      </footer>
     </div>
   );
 }

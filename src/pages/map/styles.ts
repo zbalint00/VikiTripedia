@@ -3,30 +3,27 @@ import { t } from "../../styles/theme";
 
 const page = css`
   width: 100%;
-  height: calc(100dvh - 56px);
+  height: calc(100vh - var(--nav-height, 56px));
+  height: calc(100dvh - var(--nav-height, 56px));
   min-height: 0;
-  padding-top: 56px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: ${t.bg};
-
-  @media (max-width: 760px) {
-    height: calc(100dvh - 92px);
-    padding-top: 92px;
-  }
 `;
 
 const header = css`
   flex: 0 0 auto;
-  padding: 16px 24px;
+  padding: 14px 24px;
   border-bottom: 1px solid ${t.border};
+  background: ${t.card};
 
   @media (max-width: 760px) {
     display: none;
   }
 `;
+
 
 const headerTitle = css`
   font-family: ${t.fontDisplay};
@@ -45,7 +42,8 @@ const headerSub = css`
 const body = css`
   position: relative;
   display: flex;
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
 
@@ -55,10 +53,10 @@ const body = css`
 `;
 
 const mapArea = css`
-  flex: 1;
+  position: relative;
+  flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
-  position: relative;
   overflow: hidden;
   background: linear-gradient(
     135deg,
@@ -75,6 +73,7 @@ const mapArea = css`
   }
 `;
 
+
 const mapCanvas = css`
   position: absolute;
   inset: 0;
@@ -88,11 +87,13 @@ const mapCanvas = css`
   svg {
     width: 100%;
     height: 100%;
+    max-width: 100%;
     max-height: 100%;
     display: block;
     touch-action: none;
   }
 `;
+
 
 const svgMap = css`
   width: 100%;
@@ -140,12 +141,22 @@ const mapControls = css`
   }
 
   @media (max-width: 760px) {
-    top: 76px;
+    top: 70px;
     right: 12px;
 
     button {
       width: 40px;
       height: 40px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    top: 66px;
+    right: 8px;
+
+    button {
+      width: 36px;
+      height: 36px;
     }
   }
 `;
@@ -170,14 +181,20 @@ const mapHint = css`
   pointer-events: none;
 
   @media (max-width: 760px) {
-    top: 76px;
+    top: 12px;
     left: 12px;
+  }
+
+  @media (max-width: 380px) {
+    max-width: calc(100% - 76px);
+    padding: 8px 10px;
+    font-size: 12px;
   }
 `;
 
 const panel = css`
-  width: 360px;
-  min-width: 360px;
+  width: clamp(300px, 31vw, 400px);
+  min-width: 300px;
   max-width: 42vw;
   flex: 0 0 auto;
   min-height: 0;
@@ -190,6 +207,11 @@ const panel = css`
   transition:
     width 0.25s ease,
     min-width 0.25s ease;
+
+  @media (max-width: 900px) and (min-width: 761px) {
+    width: 320px;
+    min-width: 280px;
+  }
 
   @media (max-width: 760px) {
     position: absolute;

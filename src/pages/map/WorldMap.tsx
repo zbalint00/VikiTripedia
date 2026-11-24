@@ -153,7 +153,7 @@ export default function WorldMap({
           center={center}
           zoom={zoom}
           minZoom={1}
-          maxZoom={14}
+          maxZoom={100}
           onMoveEnd={({ coordinates, zoom: newZoom }) => {
             setCenter(coordinates!);
             setZoom(newZoom!);

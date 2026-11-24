@@ -1,4 +1,4 @@
-import { useState, type SyntheticEvent } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import type { LoginProps } from "./type";
 import { styles } from "./styles";
 import loginBg from "../../assets/login.jpg";
@@ -10,6 +10,16 @@ const LoginPage = ({ onLogin }: LoginProps) => {
   const [error, setError] = useState("");
   const [shake, setShake] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const shakeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (shakeTimeout.current) {
+        clearTimeout(shakeTimeout.current);
+      }
+    };
+  }, []);
 
   async function login(username: string, password: string) {
     if (username.trim().toLowerCase() !== "vicky98") {
@@ -34,8 +44,25 @@ const LoginPage = ({ onLogin }: LoginProps) => {
     }
   }
 
+  function triggerShake() {
+    if (shakeTimeout.current) {
+      clearTimeout(shakeTimeout.current);
+    }
+
+    setShake(false);
+
+    requestAnimationFrame(() => {
+      setShake(true);
+
+      shakeTimeout.current = setTimeout(() => {
+        setShake(false);
+      }, 550);
+    });
+  }
+
   async function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
+
     if (loading) return;
 
     setError("");
@@ -48,51 +75,67 @@ const LoginPage = ({ onLogin }: LoginProps) => {
       setError(
         err instanceof Error ? err.message : "Nem sikerült bejelentkezni.",
       );
-      setShake(true);
-      window.setTimeout(() => setShake(false), 600);
+
+      triggerShake();
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className={styles.page}>
-      {/* Background */}
-      <div className={styles.bg}>
-        <img src={loginBg} alt="login background" className={styles.bgImg} />
+    <main className={styles.page}>
+      <div className={styles.bg} aria-hidden="true">
+        <img
+          src={loginBg}
+          alt=""
+          className={styles.bgImg}
+          fetchPriority="high"
+        />
         <div className={styles.bgOverlay} />
       </div>
 
-      {/* Card */}
-      <div
-        className={`${styles.cardWrap} ${shake ? styles.cardWrapShake : ""}`}
-      >
-        <div className={styles.card}>
-          {/* Heart icon */}
+      <div className={styles.cardWrap}>
+        <div className={`${styles.card} ${shake ? styles.cardWrapShake : ""}`}>
           <div className={styles.iconWrap}>
-            <div className={styles.icon}>♡</div>
+            <div className={styles.icon} aria-hidden="true">
+              ♡
+            </div>
           </div>
 
           <h1 className={styles.heading}>A Mi Világunk</h1>
           <p className={styles.subheading}>Egy kis sarok csak nekünk</p>
 
           <form onSubmit={handleSubmit} className={styles.form}>
-            <div>
-              <label className={styles.label}>Felhasználónév</label>
+            <div className={styles.field}>
+              <label htmlFor="login-username" className={styles.label}>
+                Felhasználónév
+              </label>
+
               <input
+                id="login-username"
                 type="text"
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
                   setError("");
                 }}
-                placeholder="your name"
+                placeholder="Felhasználónév"
                 className={styles.input}
+                autoComplete="username"
+                autoCapitalize="none"
+                spellCheck={false}
+                required
+                disabled={loading}
               />
             </div>
-            <div>
-              <label className={styles.label}>Jelszó</label>
+
+            <div className={styles.field}>
+              <label htmlFor="login-password" className={styles.label}>
+                Jelszó
+              </label>
+
               <input
+                id="login-password"
                 type="password"
                 value={password}
                 onChange={(e) => {
@@ -101,33 +144,45 @@ const LoginPage = ({ onLogin }: LoginProps) => {
                 }}
                 placeholder="••••••••"
                 className={styles.input}
+                autoComplete="current-password"
                 required
+                disabled={loading}
               />
             </div>
 
             {error && (
-              <>
-                <p className={styles.errorMsg}>
-                  {error}
-                  Hmm, vajon mi lehet a jelszó...
-                </p>
-                <p className={styles.errorMsg}>Melyik évben is születtél?</p>
-              </>
+              <div className={styles.errorContainer} role="alert">
+                <p className={styles.errorMsg}>{error}</p>
+
+                {error === "Hibás felhasználónév vagy jelszó." && (
+                  <p className={styles.errorHint}>
+                    Hmm, vajon mi lehet a jelszó... Melyik évben is születtél?
+                    Mikor is jöttünk össze?
+                  </p>
+                )}
+              </div>
             )}
 
             <button
               type="submit"
               className={styles.submitBtn}
-              disabled={loading}
+              disabled={loading || !username.trim() || !password}
             >
-              {loading ? "Belépés..." : "Belépés a világunkba"}
+              {loading ? (
+                <>
+                  <span className={styles.spinner} aria-hidden="true" />
+                  Belépés...
+                </>
+              ) : (
+                "Belépés a világunkba"
+              )}
             </button>
           </form>
 
           <p className={styles.footer}>Készült sok ♡ csak neked</p>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
