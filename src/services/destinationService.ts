@@ -72,13 +72,6 @@ function normalizeCityName(name: string): string {
     .replace(/[^a-z0-9]/g, "");
 }
 
-function getGridKey(lat: number, lng: number): string {
-  const x = Math.floor(lng / GRID_SIZE);
-  const y = Math.floor(lat / GRID_SIZE);
-
-  return `${x}:${y}`;
-}
-
 function addSegmentToGrid(segment: CoastSegment) {
   const minX = Math.floor(segment.minLng / GRID_SIZE);
   const maxX = Math.floor(segment.maxLng / GRID_SIZE);
