@@ -1,5 +1,7 @@
 import type { CountryInfo } from "../data/countryData";
 import { airportCitiesByCountry } from "../data/airportCities";
+import { point, lineString } from "@turf/helpers";
+import pointToLineDistance from "@turf/point-to-line-distance";
 
 export interface Destination {
   id: number;
@@ -11,6 +13,7 @@ export interface Destination {
   isAirportCity: boolean;
   airportCodes: string[];
   airportRank: number;
+  isCoastal: boolean;
   score: number;
 }
 
@@ -31,8 +34,34 @@ interface GeoNamesResponse {
   };
 }
 
-const CACHE_PREFIX = "vikitripedia:destinations:v2:";
+interface CoastlineGeoJSON {
+  type: "FeatureCollection";
+  features: {
+    geometry: {
+      type: "LineString" | "MultiLineString";
+      coordinates: number[][] | number[][][];
+    };
+  }[];
+}
+
+interface CoastSegment {
+  line: ReturnType<typeof lineString>;
+  minLng: number;
+  maxLng: number;
+  minLat: number;
+  maxLat: number;
+}
+
+const CACHE_PREFIX = "vikitripedia:destinations:v3:";
 const CACHE_DURATION = 30 * 24 * 60 * 60 * 1000;
+
+const COAST_RADIUS_KM = 20;
+const COASTAL_BONUS = 800;
+const GRID_SIZE = 0.5;
+
+let coastlinePromise: Promise<CoastSegment[]> | null = null;
+
+const coastlineGrid = new Map<string, CoastSegment[]>();
 
 function normalizeCityName(name: string): string {
   return name
@@ -43,10 +72,130 @@ function normalizeCityName(name: string): string {
     .replace(/[^a-z0-9]/g, "");
 }
 
+function getGridKey(lat: number, lng: number): string {
+  const x = Math.floor(lng / GRID_SIZE);
+  const y = Math.floor(lat / GRID_SIZE);
+
+  return `${x}:${y}`;
+}
+
+function addSegmentToGrid(segment: CoastSegment) {
+  const minX = Math.floor(segment.minLng / GRID_SIZE);
+  const maxX = Math.floor(segment.maxLng / GRID_SIZE);
+  const minY = Math.floor(segment.minLat / GRID_SIZE);
+  const maxY = Math.floor(segment.maxLat / GRID_SIZE);
+
+  for (let x = minX; x <= maxX; x++) {
+    for (let y = minY; y <= maxY; y++) {
+      const key = `${x}:${y}`;
+
+      const list = coastlineGrid.get(key) ?? [];
+      list.push(segment);
+      coastlineGrid.set(key, list);
+    }
+  }
+}
+
+async function getCoastlineSegments(): Promise<CoastSegment[]> {
+  if (!coastlinePromise) {
+    coastlinePromise = fetch(
+      `${import.meta.env.BASE_URL}data/coastline.geojson`,
+    )
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`Partvonal betöltési hiba: ${response.status}`);
+        }
+
+        const geojson = (await response.json()) as CoastlineGeoJSON;
+        const segments: CoastSegment[] = [];
+
+        for (const feature of geojson.features) {
+          const geometry = feature.geometry;
+
+          const lines =
+            geometry.type === "LineString"
+              ? [geometry.coordinates as number[][]]
+              : (geometry.coordinates as number[][][]);
+
+          for (const coordinates of lines) {
+            for (let i = 0; i < coordinates.length - 1; i++) {
+              const a = coordinates[i];
+              const b = coordinates[i + 1];
+
+              const segment: CoastSegment = {
+                line: lineString([a, b]),
+                minLng: Math.min(a[0], b[0]),
+                maxLng: Math.max(a[0], b[0]),
+                minLat: Math.min(a[1], b[1]),
+                maxLat: Math.max(a[1], b[1]),
+              };
+
+              segments.push(segment);
+              addSegmentToGrid(segment);
+            }
+          }
+        }
+
+        return segments;
+      })
+      .catch((error) => {
+        coastlinePromise = null;
+        coastlineGrid.clear();
+        throw error;
+      });
+  }
+
+  return coastlinePromise;
+}
+
+async function isCoastalCity(
+  latitude: number,
+  longitude: number,
+): Promise<boolean> {
+  await getCoastlineSegments();
+
+  const x = Math.floor(longitude / GRID_SIZE);
+  const y = Math.floor(latitude / GRID_SIZE);
+
+  const cityPoint = point([longitude, latitude]);
+
+  const nearbySegments = new Set<CoastSegment>();
+
+  // A város körüli 3×3 rácsot ellenőrizzük.
+  for (let dx = -1; dx <= 1; dx++) {
+    for (let dy = -1; dy <= 1; dy++) {
+      const key = `${x + dx}:${y + dy}`;
+
+      const segments = coastlineGrid.get(key);
+
+      if (!segments) continue;
+
+      segments.forEach((segment) => nearbySegments.add(segment));
+    }
+  }
+
+  for (const segment of nearbySegments) {
+    const latDistance = Math.abs(latitude - segment.minLat);
+
+    if (latDistance > 1) continue;
+
+    const distance = pointToLineDistance(cityPoint, segment.line, {
+      units: "kilometers",
+    });
+
+    if (distance <= COAST_RADIUS_KM) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 function calculateCityScore(
   population: number,
   isCapital: boolean,
   airportRank: number,
+  isCoastal: boolean,
 ): number {
   let score = 0;
 
@@ -56,7 +205,9 @@ function calculateCityScore(
   else if (airportRank === 2) score += 200;
   else if (airportRank === 1) score += 50;
 
-  // A népesség kiegészítő súlyozás.
+  // Tengerparti célpontokat erősen preferálunk.
+  if (isCoastal) score += COASTAL_BONUS;
+
   score += Math.log10(Math.max(population, 1)) * 10;
 
   return score;
@@ -190,7 +341,7 @@ export async function getCountryDestinations(
     ]),
   );
 
-  const candidates = places
+  const candidates: Destination[] = places
     .filter(
       (place) =>
         Number.isFinite(Number(place.lat)) &&
@@ -217,30 +368,59 @@ export async function getCountryDestinations(
         isAirportCity: Boolean(airport),
         airportCodes: airport?.iataCodes ?? [],
         airportRank,
-        score: calculateCityScore(population, isCapital, airportRank),
+        isCoastal: false,
+        score: calculateCityScore(population, isCapital, airportRank, false),
       };
     });
 
   candidates.sort((a, b) => b.score - a.score);
 
+  // A partvonal ellenőrzéséhez csak a legjobb 150 várost vizsgáljuk.
+  // Ez jelentősen csökkenti a számításokat.
+  const coastalCandidates = candidates.slice(0, 150);
+
+  await Promise.all(
+    coastalCandidates.map(async (city) => {
+      city.isCoastal = await isCoastalCity(city.latitude, city.longitude);
+
+      city.score = calculateCityScore(
+        city.population,
+        city.isCapital,
+        city.airportRank,
+        city.isCoastal,
+      );
+    }),
+  );
+
+  candidates.sort((a, b) => b.score - a.score);
+
   const selectedCities: Destination[] = [];
 
-  // A főváros mindig első.
+  // Főváros mindig benne legyen.
   const capital = candidates.find((city) => city.isCapital);
 
   if (capital) {
     selectedCities.push(capital);
   }
 
-  // A többi város a pontszám alapján kerül be.
+  // Tengerparti városokat előnyben részesítjük.
+  const coastalCities = candidates.filter((city) => city.isCoastal);
+
+  for (const city of coastalCities) {
+    if (selectedCities.length >= 5) break;
+
+    if (!selectedCities.some((item) => item.id === city.id)) {
+      selectedCities.push(city);
+    }
+  }
+
+  // A fennmaradó helyeket a pontszám alapján töltjük fel.
   for (const city of candidates) {
     if (selectedCities.length >= 5) break;
 
-    if (selectedCities.some((item) => item.id === city.id)) {
-      continue;
+    if (!selectedCities.some((item) => item.id === city.id)) {
+      selectedCities.push(city);
     }
-
-    selectedCities.push(city);
   }
 
   saveDestinations(country.alpha2, selectedCities);

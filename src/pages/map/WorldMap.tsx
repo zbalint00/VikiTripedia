@@ -83,7 +83,7 @@ export default function WorldMap({
   };
 
   const zoom = selectedCity
-    ? 5
+    ? 7
     : selected
       ? (countryZoom[selected.alpha2?.toUpperCase() ?? ""] ?? 2.5)
       : 1;
@@ -132,7 +132,7 @@ export default function WorldMap({
 
         {/* Városjelölők kizárólag kiválasztott ország esetén */}
         {selected &&
-          destinations.map((city) => (
+          (selectedCity ? [selectedCity] : destinations).map((city) => (
             <Marker key={city.id} coordinates={[city.longitude, city.latitude]}>
               <g
                 onClick={() => onCitySelect(city)}
