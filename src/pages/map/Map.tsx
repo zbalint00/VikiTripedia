@@ -16,7 +16,11 @@ import { t } from "../../styles/theme";
 import { CityBadges } from "./CityBadges";
 import { getCityPhotos, type CityPhoto } from "../../services/cityPhotoService";
 
-const listConfig: { key: ListName; label: string; icon: string }[] = [
+const listConfig: {
+  key: ListName;
+  label: string;
+  icon: string;
+}[] = [
   { key: "favorites", label: "Kedvencek", icon: "❤️" },
   { key: "beenThere", label: "Már voltunk itt", icon: "✅" },
   { key: "wishlist", label: "Kívánságlista", icon: "🌟" },
@@ -25,26 +29,40 @@ const listConfig: { key: ListName; label: string; icon: string }[] = [
 
 export default function MapPage() {
   const [selected, setSelected] = useState<CountryInfo | null>(null);
+
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+
   const [countryQuery, setCountryQuery] = useState("");
+
   const [showCountryPicker, setShowCountryPicker] = useState(false);
-  // Éghajlati adatok betöltése
+
+  const [panelExpanded, setPanelExpanded] = useState(false);
+
   const [climateData, setClimateData] = useState<MonthlyClimate[]>([]);
+
   const [climateLoading, setClimateLoading] = useState(false);
+
   const [climateError, setClimateError] = useState<string | null>(null);
-  // Városok betöltése
+
   const [destinations, setDestinations] = useState<Destination[]>([]);
+
   const [destinationsLoading, setDestinationsLoading] = useState(false);
+
   const [destinationsError, setDestinationsError] = useState<string | null>(
     null,
   );
-  // Kiválasztott város
+
   const [selectedCity, setSelectedCity] = useState<Destination | null>(null);
-  // Városfotók betöltése
+
   const [cityPhotos, setCityPhotos] = useState<CityPhoto[]>([]);
+
   const [cityPhotosLoading, setCityPhotosLoading] = useState(false);
+
   const [cityPhotosError, setCityPhotosError] = useState<string | null>(null);
 
+  const { add, remove, isIn } = useTravel();
+
+  // Climate
   useEffect(() => {
     if (!selected) {
       setClimateData([]);
@@ -90,6 +108,7 @@ export default function MapPage() {
     };
   }, [selected]);
 
+  // Destinations
   useEffect(() => {
     setSelectedCity(null);
 
@@ -137,6 +156,7 @@ export default function MapPage() {
     };
   }, [selected]);
 
+  // City photos
   useEffect(() => {
     if (!selectedCity || !selected) {
       setCityPhotos([]);
@@ -196,8 +216,6 @@ export default function MapPage() {
         )[0]
       : null;
 
-  const { add, remove, isIn } = useTravel();
-
   function showToast(msg: string) {
     setToastMsg(msg);
     setTimeout(() => setToastMsg(null), 2500);
@@ -205,6 +223,7 @@ export default function MapPage() {
 
   function handleListToggle(list: ListName, country: CountryInfo) {
     const cfg = listConfig.find((l) => l.key === list)!;
+
     if (isIn(list, country.id)) {
       remove(list, country.id);
       showToast(`Removed from ${cfg.label}`);
@@ -215,14 +234,45 @@ export default function MapPage() {
         flag: country.flag,
         region: country.region,
       });
+
       showToast(`Added to ${cfg.label}! ${country.flag}`);
     }
   }
+
+  function selectCountry(country: CountryInfo) {
+    setSelectedCity(null);
+    setSelected(country);
+    setPanelExpanded(false);
+    setCountryQuery("");
+    setShowCountryPicker(false);
+  }
+
+  function selectCity(city: Destination) {
+    setSelectedCity(city);
+    setPanelExpanded(true);
+  }
+
+  function closePanel() {
+    setSelectedCity(null);
+    setSelected(null);
+    setPanelExpanded(false);
+  }
+
+  const matchingCountries = Object.values(countryData).filter((country) =>
+    country.name.toLowerCase().includes(countryQuery.trim().toLowerCase()),
+  );
+
+  const panelClass = cx(
+    styles.panel,
+    panelExpanded && styles.panelExpanded,
+    !panelExpanded && styles.panelCollapsed,
+  );
 
   return (
     <div className={styles.page}>
       <div className={styles.header}>
         <h1 className={styles.headerTitle}>Fedezzük fel a világot</h1>
+
         <p className={styles.headerSub}>
           Válassz egy országot, nézd meg az éghajlatát, a repülési lehetőségeket
           és a legérdekesebb úti célokat.
@@ -230,18 +280,18 @@ export default function MapPage() {
       </div>
 
       <div className={styles.body}>
+        {/* MAP */}
         <div className={styles.mapArea}>
           <WorldMap
             selected={selected}
-            onSelect={(country) => {
-              setSelectedCity(null);
-              setSelected(country);
-            }}
+            onSelect={selectCountry}
             isIn={isIn}
             destinations={destinations}
             selectedCity={selectedCity}
-            onCitySelect={setSelectedCity}
+            onCitySelect={selectCity}
           />
+
+          {/* COUNTRY SEARCH */}
           <div className={styles.pickerBar}>
             <input
               type="text"
@@ -256,20 +306,8 @@ export default function MapPage() {
                   setShowCountryPicker(false);
                 }
 
-                if (event.key === "Enter") {
-                  const firstMatch = Object.values(countryData).find(
-                    (country) =>
-                      country.name
-                        .toLowerCase()
-                        .includes(countryQuery.trim().toLowerCase()),
-                  );
-
-                  if (firstMatch) {
-                    setSelectedCity(null);
-                    setSelected(firstMatch);
-                    setCountryQuery("");
-                    setShowCountryPicker(false);
-                  }
+                if (event.key === "Enter" && matchingCountries.length > 0) {
+                  selectCountry(matchingCountries[0]);
                 }
               }}
               placeholder="🔎  Ország keresése..."
@@ -287,36 +325,21 @@ export default function MapPage() {
                 />
 
                 <div className={styles.pickerResults}>
-                  {Object.values(countryData)
-                    .filter((country) =>
-                      country.name
-                        .toLowerCase()
-                        .includes(countryQuery.trim().toLowerCase()),
-                    )
-                    .slice(0, 8)
-                    .map((country) => (
-                      <button
-                        type="button"
-                        key={country.id}
-                        className={styles.pickerResult}
-                        onClick={() => {
-                          setSelectedCity(null);
-                          setSelected(country);
-                          setCountryQuery("");
-                          setShowCountryPicker(false);
-                        }}
-                      >
-                        <span>{country.flag}</span>
-                        <span>{country.name}</span>
-                        {selected?.id === country.id && <span>✓</span>}
-                      </button>
-                    ))}
+                  {matchingCountries.slice(0, 8).map((country) => (
+                    <button
+                      type="button"
+                      key={country.id}
+                      className={styles.pickerResult}
+                      onClick={() => selectCountry(country)}
+                    >
+                      <span>{country.flag}</span>
+                      <span>{country.name}</span>
 
-                  {Object.values(countryData).filter((country) =>
-                    country.name
-                      .toLowerCase()
-                      .includes(countryQuery.trim().toLowerCase()),
-                  ).length === 0 && (
+                      {selected?.id === country.id && <span>✓</span>}
+                    </button>
+                  ))}
+
+                  {matchingCountries.length === 0 && (
                     <p className={styles.pickerEmpty}>Nincs ilyen ország.</p>
                   )}
                 </div>
@@ -325,18 +348,39 @@ export default function MapPage() {
           </div>
         </div>
 
-        <div
-          className={styles.panel}
-          style={{ width: selected ? 360 : 0, minWidth: selected ? 360 : 0 }}
-        >
-          {selected &&
-            (selectedCity ? (
+        {/* DETAILS PANEL */}
+        {selected && (
+          <div className={panelClass}>
+            {/* Mobil panel fogantyú */}
+            <button
+              type="button"
+              className={styles.panelHandle}
+              onClick={() => setPanelExpanded((current) => !current)}
+              aria-label={
+                panelExpanded ? "Panel összecsukása" : "Panel kibontása"
+              }
+            >
+              <span className={styles.handleBar} />
+
+              <span className={styles.handleText}>
+                {panelExpanded
+                  ? "Összecsukás ▲"
+                  : selectedCity
+                    ? `${selectedCity.name} · Részletek ▼`
+                    : `${selected.flag} ${selected.name} · Részletek ▼`}
+              </span>
+            </button>
+
+            {selectedCity ? (
+              /* CITY DETAILS */
               <div className={styles.panelInner}>
-                {/* VÁROS PANEL */}
                 <div style={{ marginBottom: 18 }}>
                   <button
                     type="button"
-                    onClick={() => setSelectedCity(null)}
+                    onClick={() => {
+                      setSelectedCity(null);
+                      setPanelExpanded(false);
+                    }}
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -380,17 +424,15 @@ export default function MapPage() {
 
                     <button
                       className={styles.closeBtn}
-                      onClick={() => {
-                        setSelectedCity(null);
-                        setSelected(null);
-                      }}
+                      onClick={closePanel}
+                      aria-label="Bezárás"
                     >
                       ✕
                     </button>
                   </div>
                 </div>
 
-                {/* Város jelvényei */}
+                {/* CITY BADGES */}
                 <div
                   style={{
                     display: "flex",
@@ -431,7 +473,7 @@ export default function MapPage() {
                   )}
                 </div>
 
-                {/* VÁROSFOTÓK */}
+                {/* PHOTOS */}
                 <div style={{ marginTop: 24 }}>
                   <h3
                     style={{
@@ -607,7 +649,7 @@ export default function MapPage() {
                     })}
                 </div>
 
-                {/* Város információk */}
+                {/* CITY INFORMATION */}
                 <div className={styles.infoCard}>
                   <div className={styles.infoRow}>
                     <span className={styles.infoIcon}>📍</span>
@@ -662,7 +704,7 @@ export default function MapPage() {
                   )}
                 </div>
 
-                {/* Külső térkép */}
+                {/* GOOGLE MAPS */}
                 <div className={styles.infoCard}>
                   <div className={styles.infoRow}>
                     <span className={styles.infoIcon}>🗺️</span>
@@ -703,6 +745,7 @@ export default function MapPage() {
                 </p>
               </div>
             ) : (
+              /* COUNTRY DETAILS */
               <div className={styles.panelInner}>
                 <div className={styles.panelTop}>
                   <div>
@@ -730,16 +773,22 @@ export default function MapPage() {
                         />
                       )}
                     </div>
+
                     <h2 className={styles.panelTitle}>{selected.name}</h2>
+
                     <p className={styles.panelRegion}>{selected.region}</p>
                   </div>
+
                   <button
                     className={styles.closeBtn}
-                    onClick={() => setSelected(null)}
+                    onClick={closePanel}
+                    aria-label="Bezárás"
                   >
                     ✕
                   </button>
                 </div>
+
+                {/* CLIMATE */}
                 <div className={styles.climateCard}>
                   <div className={styles.infoRow}>
                     <span className={styles.infoIcon}>🌡️</span>
@@ -775,9 +824,11 @@ export default function MapPage() {
                             <span className={styles.climateSummaryLabel}>
                               Legmelegebb hónap
                             </span>
+
                             <span className={styles.climateSummaryValue}>
                               {warmestMonth?.monthName}
                             </span>
+
                             <span className={styles.climateSummaryLabel}>
                               {warmestMonth?.averageTemperature.toFixed(1)} °C
                             </span>
@@ -787,15 +838,18 @@ export default function MapPage() {
                             <span className={styles.climateSummaryLabel}>
                               Legcsapadékosabb hónap
                             </span>
+
                             <span className={styles.climateSummaryValue}>
                               {wettestMonth?.monthName}
                             </span>
+
                             <span className={styles.climateSummaryLabel}>
                               {wettestMonth?.averagePrecipitation.toFixed(0)} mm
                             </span>
                           </div>
                         </div>
 
+                        {/* TEMPERATURE CHART */}
                         <div className={styles.climateChart}>
                           {climateData.map((month) => {
                             const barWidth = Math.max(
@@ -818,7 +872,9 @@ export default function MapPage() {
                                 <div className={styles.climateBarTrack}>
                                   <div
                                     className={styles.climateBar}
-                                    style={{ width: `${barWidth}%` }}
+                                    style={{
+                                      width: `${barWidth}%`,
+                                    }}
                                   />
                                 </div>
 
@@ -830,6 +886,7 @@ export default function MapPage() {
                           })}
                         </div>
 
+                        {/* MONTHLY DETAILS */}
                         <div className={styles.climateDetails}>
                           {climateData.map((month) => (
                             <div
@@ -863,7 +920,7 @@ export default function MapPage() {
                     )}
                 </div>
 
-                {/* Repülőjegyek */}
+                {/* FLIGHTS */}
                 <div className={styles.infoCard}>
                   <div className={styles.infoRow}>
                     <span className={styles.infoIcon}>✈️</span>
@@ -893,8 +950,7 @@ export default function MapPage() {
                   </p>
                 </div>
 
-                {/* Városok */}
-
+                {/* DESTINATIONS */}
                 <div className={styles.infoCard}>
                   <div className={styles.infoRow}>
                     <span className={styles.infoIcon}>📍</span>
@@ -925,7 +981,7 @@ export default function MapPage() {
                     <button
                       key={city.id}
                       type="button"
-                      onClick={() => setSelectedCity(city)}
+                      onClick={() => selectCity(city)}
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -945,8 +1001,11 @@ export default function MapPage() {
                     >
                       <span>
                         <span style={{ marginRight: 9 }}>❤️</span>
+
                         <strong>{city.name}</strong>
+
                         <CityBadges city={city} />
+
                         {city.isCapital && (
                           <span
                             style={{
@@ -958,6 +1017,7 @@ export default function MapPage() {
                             Főváros
                           </span>
                         )}
+
                         {city.population > 0 && (
                           <span
                             style={{
@@ -976,6 +1036,7 @@ export default function MapPage() {
                       <span style={{ color: t.mutedFg }}>›</span>
                     </button>
                   ))}
+
                   <p className={styles.climateAttribution}>
                     Városadatok:{" "}
                     <a
@@ -989,11 +1050,14 @@ export default function MapPage() {
                   </p>
                 </div>
 
+                {/* LISTS */}
                 <div className={styles.listSection}>
                   <p className={styles.listSectionLabel}>Add to my lists</p>
+
                   <div className={styles.listGrid}>
                     {listConfig.map(({ key, label, icon }) => {
                       const active = isIn(key, selected.id);
+
                       return (
                         <button
                           key={key}
@@ -1006,6 +1070,7 @@ export default function MapPage() {
                           )}
                         >
                           <span>{icon}</span>
+
                           <span
                             style={{
                               overflow: "hidden",
@@ -1022,8 +1087,9 @@ export default function MapPage() {
                   </div>
                 </div>
               </div>
-            ))}
-        </div>
+            )}
+          </div>
+        )}
       </div>
 
       {toastMsg && <div className={styles.toast}>{toastMsg}</div>}
