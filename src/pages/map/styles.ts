@@ -251,26 +251,34 @@ const panelCollapsed = css`
 const panelHandle = css`
   display: none;
 
-  @media (max-width: 760px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    min-height: 54px;
-    padding: 7px 16px;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    color: ${t.fg};
-    position: sticky;
-    top: 0;
-    z-index: 2;
+@media (max-width: 760px) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 54px;
+  padding: 7px 16px;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+  color: ${t.fg};
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &:active {
+    cursor: grabbing;
   }
+}
 `;
 
 const handleBar = css`
-  width: 38px;
+  width: 42px;
   height: 5px;
   border-radius: 999px;
   background: ${t.border};
@@ -794,6 +802,125 @@ const countryDefaultStyle = {
   cursor: "pointer",
 } as const;
 
+const flightSection = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #eadfd3;
+`;
+
+const flightHeader = css`
+  h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #3d3028;
+  }
+
+  p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #88796e;
+  }
+`;
+
+const flightDetails = css`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+`;
+
+const flightDetail = css`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  padding: 11px;
+  border-radius: 10px;
+  background: #f5eee7;
+
+  span {
+    font-size: 11px;
+    color: #88796e;
+  }
+
+  strong {
+    font-size: 12px;
+    color: #49392e;
+    overflow-wrap: anywhere;
+  }
+`;
+
+const flightDates = css`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+  }
+
+  label span {
+    font-size: 12px;
+    color: #76675d;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #e5d8cc;
+    border-radius: 9px;
+    background: #fff;
+    color: #49392e;
+    font: inherit;
+    font-size: 12px;
+  }
+
+  @media (max-width: 380px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const kiwiButton = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #d8f36a;
+  color: #26310c;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+
+  &:hover {
+    background: #c9e653;
+    transform: translateY(-1px);
+  }
+
+  span {
+    font-size: 17px;
+  }
+`;
+
+const flightDisclaimer = css`
+  margin: -7px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #998b80;
+`;
+
 export const styles = {
   page,
   header,
@@ -867,4 +994,11 @@ export const styles = {
   countryHoverStyle,
   countryPressedStyle,
   countryDefaultStyle,
+  flightSection,
+  flightHeader,
+  flightDetails,
+  flightDetail,
+  flightDates,
+  kiwiButton,
+  flightDisclaimer,
 };

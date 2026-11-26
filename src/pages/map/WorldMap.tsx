@@ -205,7 +205,7 @@ export default function WorldMap({
               >
                 {/* A marker méretét kompenzáljuk a zoommal */}
                 <g
-                  transform={`scale(${1 / zoom})`}
+                  transform={`scale(${1 / (zoom * 0.5)})`}
                   onClick={() => onCitySelect(city)}
                   style={{
                     cursor: "pointer",

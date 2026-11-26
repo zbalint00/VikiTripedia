@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { cx } from "@emotion/css";
 import { useTravel, type ListName } from "../../travelStore";
 import { countryData, type CountryInfo } from "../../data/countryData";
@@ -27,6 +27,22 @@ const listConfig: {
   { key: "nextTrip", label: "Következő kaland", icon: "✈️" },
 ];
 
+function createKiwiSearchUrl(
+  destinationCode: string,
+  departureDate?: string,
+  returnDate?: string,
+): string {
+  const baseUrl =
+    "https://www.kiwi.com/hu/search/tiles/" +
+    "budapest-liszt-ferenc-nemzetkozi-repuloter-budapest-magyarorszag";
+
+  if (departureDate && returnDate) {
+    return `${baseUrl}/${destinationCode}/${departureDate}/${returnDate}/?adults=2&children=0&infants=0`;
+  }
+
+  return `${baseUrl}/${destinationCode}/anytime/?adults=2&children=0&infants=0`;
+}
+
 export default function MapPage() {
   const [selected, setSelected] = useState<CountryInfo | null>(null);
 
@@ -37,6 +53,8 @@ export default function MapPage() {
   const [showCountryPicker, setShowCountryPicker] = useState(false);
 
   const [panelExpanded, setPanelExpanded] = useState(false);
+  const touchStartY = useRef<number | null>(null);
+  const wasSwiped = useRef(false);
 
   const [climateData, setClimateData] = useState<MonthlyClimate[]>([]);
 
@@ -59,6 +77,9 @@ export default function MapPage() {
   const [cityPhotosLoading, setCityPhotosLoading] = useState(false);
 
   const [cityPhotosError, setCityPhotosError] = useState<string | null>(null);
+
+  const [flightDeparture, setFlightDeparture] = useState("");
+  const [flightReturn, setFlightReturn] = useState("");
 
   const { add, remove, isIn } = useTravel();
 
@@ -216,6 +237,39 @@ export default function MapPage() {
         )[0]
       : null;
 
+  function openKiwiSearch() {
+    if (!selected) return;
+
+    // A destinationCode az aktuálisan kiválasztott ország kétbetűs ISO-kódja.
+    const destinationCode = selected.alpha2?.toUpperCase();
+
+    if (!destinationCode) {
+      showToast("Ehhez az országhoz nem található országkód.");
+      return;
+    }
+
+    if (
+      (flightDeparture && !flightReturn) ||
+      (!flightDeparture && flightReturn)
+    ) {
+      showToast("Oda-vissza kereséshez mindkét dátumot add meg.");
+      return;
+    }
+
+    if (flightDeparture && flightReturn && flightReturn < flightDeparture) {
+      showToast("A visszaút dátuma nem lehet korábbi az indulásnál.");
+      return;
+    }
+
+    const url = createKiwiSearchUrl(
+      destinationCode,
+      flightDeparture || undefined,
+      flightReturn || undefined,
+    );
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
   function showToast(msg: string) {
     setToastMsg(msg);
     window.clearTimeout(
@@ -360,7 +414,41 @@ export default function MapPage() {
             <button
               type="button"
               className={styles.panelHandle}
-              onClick={() => setPanelExpanded((current) => !current)}
+              onPointerDown={(event) => {
+                touchStartY.current = event.clientY;
+                wasSwiped.current = false;
+                event.currentTarget.setPointerCapture(event.pointerId);
+              }}
+              onPointerUp={(event) => {
+                if (touchStartY.current === null) return;
+
+                const deltaY = event.clientY - touchStartY.current;
+
+                if (Math.abs(deltaY) > 45) {
+                  wasSwiped.current = true;
+
+                  if (deltaY < 0) {
+                    // Felfelé húzás: kinyitás
+                    setPanelExpanded(true);
+                  } else {
+                    // Lefelé húzás: összecsukás
+                    setPanelExpanded(false);
+                  }
+                }
+
+                touchStartY.current = null;
+              }}
+              onPointerCancel={() => {
+                touchStartY.current = null;
+              }}
+              onClick={() => {
+                if (wasSwiped.current) {
+                  wasSwiped.current = false;
+                  return;
+                }
+
+                setPanelExpanded((current) => !current);
+              }}
               aria-label={
                 panelExpanded ? "Panel összecsukása" : "Panel kibontása"
               }
@@ -369,10 +457,10 @@ export default function MapPage() {
 
               <span className={styles.handleText}>
                 {panelExpanded
-                  ? "Összecsukás ▲"
+                  ? "Lehúzással összecsukható ▼"
                   : selectedCity
-                    ? `${selectedCity.name} · Részletek ▼`
-                    : `${selected.flag} ${selected.name} · Részletek ▼`}
+                    ? `${selectedCity.name} · Húzd fel a részletekhez`
+                    : `${selected.flag} ${selected.name} · Húzd fel a részletekhez`}
               </span>
             </button>
 
@@ -926,32 +1014,68 @@ export default function MapPage() {
                 </div>
 
                 {/* FLIGHTS */}
-                <div className={styles.infoCard}>
-                  <div className={styles.infoRow}>
-                    <span className={styles.infoIcon}>✈️</span>
-                    <span className={styles.infoLabel}>
-                      Repülőjegyek Budapestről
-                    </span>
+                <div className={styles.flightSection}>
+                  <div className={styles.flightHeader}>
+                    <div>
+                      <h3>Repülőjegyek Budapestről</h3>
+                      <p>Keress járatokat a kiválasztott országba!</p>
+                    </div>
                   </div>
 
-                  <p className={styles.infoText}>
-                    Itt később valós repülőjegy-ajánlatokat jelenítünk meg a
-                    kiválasztott utazási dátumok alapján.
-                  </p>
+                  <div className={styles.flightDetails}>
+                    <div className={styles.flightDetail}>
+                      <span>Indulás</span>
+                      <strong>Budapest (BUD)</strong>
+                    </div>
 
-                  <div className={styles.costRow}>
-                    <span className={styles.costLabel}>Indulás</span>
-                    <strong>Budapest (BUD)</strong>
+                    <div className={styles.flightDetail}>
+                      <span>Érkezés</span>
+                      <strong>{selected?.name}</strong>
+                    </div>
+
+                    <div className={styles.flightDetail}>
+                      <span>Utasok</span>
+                      <strong>2 fő</strong>
+                    </div>
                   </div>
 
-                  <div className={styles.costRow}>
-                    <span className={styles.costLabel}>Utasok</span>
-                    <strong>2 fő</strong>
+                  <div className={styles.flightDates}>
+                    <label>
+                      <span>Indulás dátuma</span>
+                      <input
+                        type="date"
+                        value={flightDeparture}
+                        min={new Date().toISOString().split("T")[0]}
+                        onChange={(e) => setFlightDeparture(e.target.value)}
+                      />
+                    </label>
+
+                    <label>
+                      <span>Visszaút dátuma</span>
+                      <input
+                        type="date"
+                        value={flightReturn}
+                        min={
+                          flightDeparture ||
+                          new Date().toISOString().split("T")[0]
+                        }
+                        onChange={(e) => setFlightReturn(e.target.value)}
+                      />
+                    </label>
                   </div>
 
-                  <p className={styles.climateDescription}>
-                    A kereséshez később dátumválasztót és valós árlekérdezést
-                    adunk hozzá.
+                  <button
+                    type="button"
+                    className={styles.kiwiButton}
+                    onClick={openKiwiSearch}
+                  >
+                    Repülőjegyek keresése a Kiwi.com-on
+                    <span>↗</span>
+                  </button>
+
+                  <p className={styles.flightDisclaimer}>
+                    A keresés a Kiwi.com oldalán nyílik meg. Dátumok nélkül
+                    rugalmas keresést indíthatsz.
                   </p>
                 </div>
 
