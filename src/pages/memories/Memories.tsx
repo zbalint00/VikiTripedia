@@ -6,6 +6,7 @@ import type { Styles } from "./type";
 import { styles } from "./styles";
 
 import torokKaja from "../../assets/torok_ebed.jpg";
+import turkish from "../../assets/turkish.jpg";
 import arc from "../../assets/arc.jpg";
 import beachMirror from "../../assets/beach_mirror.jpg";
 import weddingKiss from "../../assets/wedding_kiss.jpg";
@@ -20,24 +21,33 @@ import torony from "../../assets/torony.jpg";
 import fiordinapoli from "../../assets/fiordinapoli.jpg";
 import szallas from "../../assets/szallas.jpg";
 import jetski from "../../assets/jetski.jpg";
+import malagarden from "../../assets/malagarden.jpg";
+import villany from "../../assets/villany.jpg";
+import balaton from "../../assets/balaton.jpg";
+import balatonSzallas from "../../assets/balaton_szallas.jpg";
 
 const initialPhotos: Photo[] = [
-  { id: "1", url: torokKaja, caption: "Egy 'kis' laza török vacsora" },
+  { id: "1", url: turkish, caption: "Sun shine with Love" },
   { id: "2", url: beachMirror, caption: "Beach time Antalyba!" },
   { id: "3", url: weddingKiss, caption: "Csókcsók puszipuszi" },
-  { id: "4", url: weddingBox, caption: "Boxolók" },
-  { id: "5", url: arc, caption: "Nincs hozzá fűzni valóm" },
-  { id: "6", url: tiszalok, caption: "Random Tiszalöki séta" },
-  { id: "7", url: cinema, caption: "Mozis est, pókemberrel" },
-  { id: "8", url: rooftop, caption: "Rooftop koktélozgatás Törökben" },
-  { id: "9", url: rooftopViki, caption: "Gyémántos hercegnőm" },
-  { id: "10", url: tejbetok, caption: "TejbeTök" },
-  { id: "11", url: naplemente, caption: "A nagy esténk a hegyen!" },
-  { id: "12", url: torony, caption: "Hadrian kapuja" },
-  { id: "13", url: fiordinapoli, caption: "Fior di Napoli. NyamNyam" },
-  { id: "14", url: szallas, caption: "Antalya szállásunk kilátása" },
+  { id: "4", url: villany, caption: "'Kis' túra Villányba" },
+  { id: "5", url: torokKaja, caption: "Egy 'kis' laza török vacsora" },
+  { id: "6", url: weddingBox, caption: "Boxolók" },
+  { id: "7", url: arc, caption: "Nincs hozzá fűzni valóm" },
+  { id: "8", url: tiszalok, caption: "Random Tiszalöki séta" },
+  { id: "9", url: cinema, caption: "Mozis est, pókemberrel" },
+  { id: "10", url: rooftop, caption: "Rooftop koktélozgatás Törökben" },
+  { id: "11", url: balatonSzallas, caption: "Wellness!!" },
+  { id: "12", url: rooftopViki, caption: "Gyémántos hercegnőm" },
+  { id: "13", url: tejbetok, caption: "TejbeTök" },
+  { id: "14", url: naplemente, caption: "A nagy esténk a hegyen!" },
+  { id: "15", url: malagarden, caption: "Kukucs!" },
+  { id: "16", url: torony, caption: "Hadrian kapuja" },
+  { id: "17", url: fiordinapoli, caption: "Fior di Napoli. NyamNyam" },
+  { id: "18", url: szallas, caption: "Antalya szállásunk kilátása" },
+  { id: "19", url: balaton, caption: "Nagy találkozások helyszíne ;)" },
   {
-    id: "15",
+    id: "20",
     url: jetski,
     caption: "Give me the beat, I ride it like a jetski",
   },
